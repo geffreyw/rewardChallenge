@@ -1,12 +1,55 @@
 // Overschrijf BS variabelen en mixins
+/*
+
+
+ */
+
+$orange : #FFA100;
+$green : #79C347;
+$blue : #00A6DD;
+$dark : #292b2c;
+$light-bg : #f4f4f4;
+$grey : #464a4c;
+
 $theme-colors: (
-  'primary': #009CAB,
-  'danger': #F04C25,
-  'salmon' : salmon
+  'primary' : $orange
+
 );
 
 // Link naar BS en FA
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-// Eigen code/partials
+/* Belangrijkste code */
+body{
+  background-color: $light-bg;
+  color: $dark;
+}
+.container{
+  background-color: white;
+}
+
+
+
+/*  header */
+.bg-gradient-blue{
+  background: linear-gradient(to bottom,#0078d7 0%,$blue);
+  box-shadow: 0 12px 45px -8px rgba(0,120,215,.35);
+}
+#header{
+  color: white;
+
+  h2{
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: bold;
+  }
+  p, span{
+    padding: 3px 0 1px;
+  }
+  .text-muted{
+    color: rgba(255,255,255,0.6) !important;
+  }
+
+}
+
