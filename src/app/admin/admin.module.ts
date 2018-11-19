@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
-import {OpdrachtListComponent} from '../opdracht-list/opdracht-list.component';
-import {OpdrachtItemComponent} from '../opdracht-list/opdracht-item/opdracht-item.component';
+import {SharedModule} from '../sharedModules/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule
   ],
-  declarations: [AdminComponent, OpdrachtListComponent, OpdrachtItemComponent]
+  declarations: [AdminComponent]
 })
 export class AdminModule { }
