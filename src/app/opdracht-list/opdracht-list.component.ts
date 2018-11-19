@@ -9,7 +9,7 @@ import {OpdrachtService} from '../services/opdracht.service';
 })
 export class OpdrachtListComponent implements OnInit {
 
-  // @Input() editable: boolean;
+  @Input() aanpasbaar: boolean;
 
   opdrachtList: Opdracht[];
 

@@ -10,6 +10,7 @@ export class OpdrachtItemComponent implements OnInit {
 
   @Input() item: Opdracht;
   @Input() index: number;
+  @Input() aanpasbaar = false;
 
   showMore = false;
 

@@ -2,10 +2,10 @@
   <div class="card-body">
     <div class="card-text">
       <div class="row">
-        <div class="col-auto text-primary">
+        <div class="col-9 col-md-12 text-primary">
           <b>{{ item.titel }}</b>
         </div>
-        <div class="col-auto ml-auto">
+        <div class="col-auto ml-auto ml-md-0">
           <div class="punt">
             <p>{{ item.punten }} <i class="fas fa-coins"></i></p>
           </div>
@@ -23,6 +23,16 @@
                   (click)="showMore=false">- Minder</button>
         </div>
       </div>
+      <!--<button type="button"
+              class="btn btn-link btn-edit"
+              *ngIf="aanpasbaar"><i class="fas fa-save"></i></button>
+      <button type="button"
+              class="btn btn-link btn-cancel"
+              *ngIf="aanpasbaar"><i class="fas fa-times"></i></button>-->
+      <button class="btn btn-link btn-edit"
+              *ngIf="aanpasbaar"><i class="fas fa-pencil-alt"></i></button>
+      <button class="btn btn-link btn-del"
+              *ngIf="aanpasbaar"><i class="fas fa-trash"></i></button>
     </div>
   </div>
 </div>
