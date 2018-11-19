@@ -5,16 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NgBootstrapModule} from './sharedModules/ng-bootstrap.module';
 import { UserModule } from './user/user.module';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoginModule } from './login/login.module';
+import { ErrorModule } from './error/error.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgBootstrapModule,
-    UserModule
+    UserModule,
+    LoginModule,
+    ErrorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
