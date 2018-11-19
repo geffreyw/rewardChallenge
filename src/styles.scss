@@ -58,3 +58,24 @@ a:hover, a:focus{
 }
 
 /*  cards */
+
+
+/*  nav-tabs   */
+.nav-tabs{
+  border-bottom: none;
+}
+.nav-tabs .nav-link.active{
+  color: #495057;
+  border: none;
+  border-bottom: 2px solid $blue;
+  background-color: inherit;
+  transition: all
+}
+.nav-tabs .nav-link{
+  color: #495057;
+  background-color: inherit;
+  padding: 0px;
+  margin: 0.5rem 1rem;
+  border: none;
+}
+

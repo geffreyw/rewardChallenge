@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Opdracht} from '../../interfaces/opdracht';
 
+
 @Component({
   selector: 'app-opdracht-item',
   templateUrl: './opdracht-item.component.html',
@@ -13,7 +14,6 @@ export class OpdrachtItemComponent implements OnInit {
   @Input() aanpasbaar = false;
 
   showMore = false;
-
   constructor() { }
 
   ngOnInit() {

@@ -3,17 +3,24 @@ import { CommonModule } from '@angular/common';
 import {OpdrachtListComponent} from '../opdracht-list/opdracht-list.component';
 import {OpdrachtItemComponent} from '../opdracht-list/opdracht-item/opdracht-item.component';
 
+import {RewardListComponent} from '../reward-list/reward-list.component';
+import {RewardItemComponent} from '../reward-list/reward-item/reward-item.component';
+
 @NgModule({
   imports: [
     CommonModule,
   ],
   exports: [
     OpdrachtListComponent,
-    OpdrachtItemComponent
+    OpdrachtItemComponent,
+    RewardListComponent,
+    RewardItemComponent
   ],
   declarations: [
     OpdrachtListComponent,
-    OpdrachtItemComponent
+    OpdrachtItemComponent,
+    RewardListComponent,
+    RewardItemComponent
   ]
 })
 export class SharedModule {

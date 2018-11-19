@@ -4,8 +4,8 @@ import { UserComponent } from './user.component';
 import { HeaderComponent } from './header/header.component';
 import { UserinfoComponent } from './header/userinfo/userinfo.component';
 import { ScoreComponent } from './header/score/score.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import {SharedModule} from '../sharedModules/shared.module';
+
 
 
 @NgModule({
@@ -13,6 +13,6 @@ import {SharedModule} from '../sharedModules/shared.module';
     CommonModule,
     SharedModule
   ],
-  declarations: [UserComponent, HeaderComponent, UserinfoComponent, ScoreComponent, NavbarComponent]
+  declarations: [UserComponent, HeaderComponent, UserinfoComponent, ScoreComponent]
 })
 export class UserModule { }
