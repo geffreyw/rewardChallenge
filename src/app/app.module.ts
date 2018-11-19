@@ -8,11 +8,12 @@ import { UserModule } from './user/user.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginModule } from './login/login.module';
 import { ErrorModule } from './error/error.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,7 +21,8 @@ import { ErrorModule } from './error/error.module';
     NgBootstrapModule,
     UserModule,
     LoginModule,
-    ErrorModule
+    ErrorModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

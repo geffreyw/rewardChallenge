@@ -13,12 +13,12 @@ $grey : #464a4c;
 
 $theme-colors: (
   'primary' : $orange
-
 );
 
 // Link naar BS en FA
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
 
 /* Belangrijkste code */
 body{
@@ -53,3 +53,11 @@ body{
 
 }
 
+// Eigen code/partials
+.btn {
+  cursor: pointer;
+}
+
+a:hover, a:focus{
+  text-decoration: none;
+}
