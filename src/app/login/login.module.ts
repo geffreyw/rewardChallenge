@@ -6,10 +6,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
-<<<<<<< HEAD
     FormsModule
-=======
->>>>>>> 486bcb08e17be1e36f97257d4b3c5dd8c97cba50
   ],
   declarations: [LoginComponent]
 })
