@@ -1,0 +1,28 @@
+<div class="card my-1">
+  <div class="card-body">
+    <div class="card-text">
+      <div class="row">
+        <div class="col-auto text-primary">
+          <b>{{ item.titel }}</b>
+        </div>
+        <div class="col-auto ml-auto">
+          <div class="punt">
+            <p>{{ item.punten }} <i class="fas fa-coins"></i></p>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="!showMore">{{ item.short }}...</p>
+      <p *ngIf="showMore">{{ item.omschrijving }}</p>
+      <div class="row">
+        <div class="mx-auto">
+          <button class="btn btn-link"
+                  *ngIf="!showMore"
+                  (click)="showMore=true">+ Meer</button>
+          <button class="btn btn-link"
+                  *ngIf="showMore"
+                  (click)="showMore=false">- Minder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

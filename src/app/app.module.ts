@@ -7,18 +7,20 @@ import {NgBootstrapModule} from './sharedModules/ng-bootstrap.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginModule } from './login/login.module';
 import { ErrorModule } from './error/error.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgBootstrapModule,
     LoginModule,
-    ErrorModule
+    ErrorModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

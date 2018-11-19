@@ -1,8 +1,8 @@
 // Overschrijf BS variabelen en mixins
 $theme-colors: (
-  'primary': #009CAB,
-  'danger': #F04C25,
-  'salmon' : salmon
+  'primary': #333e47,
+  'secondary': #71b643,
+  'third': #08ace1,
 );
 
 // Link naar BS en FA
@@ -10,3 +10,10 @@ $theme-colors: (
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 // Eigen code/partials
+.btn {
+  cursor: pointer;
+}
+
+a:hover, a:focus{
+  text-decoration: none;
+}
