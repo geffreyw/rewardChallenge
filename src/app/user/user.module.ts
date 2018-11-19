@@ -5,10 +5,13 @@ import { HeaderComponent } from './header/header.component';
 import { UserinfoComponent } from './header/userinfo/userinfo.component';
 import { ScoreComponent } from './header/score/score.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {SharedModule} from '../sharedModules/shared.module';
+
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   declarations: [UserComponent, HeaderComponent, UserinfoComponent, ScoreComponent, NavbarComponent]
 })

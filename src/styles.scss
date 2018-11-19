@@ -24,13 +24,8 @@ $theme-colors: (
 body{
   background-color: $light-bg;
   color: $dark;
+
 }
-.container{
-  background-color: white;
-}
-
-
-
 /*  header */
 .bg-gradient-blue{
   background: linear-gradient(to bottom,#0078d7 0%,$blue);
@@ -61,3 +56,5 @@ body{
 a:hover, a:focus{
   text-decoration: none;
 }
+
+/*  cards */
