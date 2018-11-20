@@ -10,6 +10,8 @@ import {RewardService} from '../services/reward.service';
 export class RewardListComponent implements OnInit {
 
   @Input() aanpasbaar: boolean;
+  @Input() elementClass: string;
+  @Input() limit: string;
 
   rewardList: Reward[];
 

@@ -9,8 +9,8 @@
     </div>
   </form>
   <app-opdracht-item class="{{ elementClass }}"
-                     *ngFor="let opracht of (opdrachtenList); let i = index"
-                     [item]="opracht"
+                     *ngFor="let opdracht of opdrachtenList | slice:0:limit; let i = index"
+                     [item]="opdracht"
                      [index]="i"
                      [aanpasbaar]="aanpasbaar">
   </app-opdracht-item>

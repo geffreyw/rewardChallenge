@@ -64,16 +64,16 @@ a:hover, a:focus{
 
 
 /*  nav-tabs   */
-.nav-tabs{
+.navbar-nav{
   border-bottom: none;
 }
-.nav-tabs .nav-link.active{
+.navbar-nav .nav-link.active{
   color: #495057;
   border: none;
   border-bottom: 2px solid $blue;
   background-color: inherit;
   transition: all}
-.nav-tabs .nav-link{
+.navbar-nav .nav-link{
   color: #495057;
   background-color: inherit;
   padding: 0px;

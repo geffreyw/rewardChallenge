@@ -13,6 +13,8 @@ export class OpdrachtListComponent implements OnInit, OnDestroy {
 
   @Input() aanpasbaar: boolean;
   @Input() elementClass: string;
+  @Input() limit: string;
+
 
   opdrachtenList: Opdracht[];
   filterValue: string;
