@@ -1,16 +1,28 @@
-<ul class="nav nav-tabs py-2">
+<nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm sticky-top">
   <a class="navbar-brand" routerLink="/"><img src="../../assets/logo-stack.png" class="" height="35"/></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/user" routerLinkActive="active">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/opdrachten" routerLinkActive="active">Opdrachten</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/rewards" routerLinkActive="active">Rewards</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/admin" routerLinkActive="active">Instellingen</a>
-  </li>
-</ul>
+  <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed" (click)="isCollapsed = !isCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/opdrachten" routerLinkActive="active">Opdrachten</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/rewards" routerLinkActive="active">Rewards</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/admin" routerLinkActive="active">Instellingen</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="javscript:void(0)">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
