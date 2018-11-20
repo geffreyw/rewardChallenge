@@ -1,6 +1,15 @@
 <div class="row">
+  <form #opdrachtfilterForm="ngForm" class="col-12">
+    <div class="form-group">
+      <label for="opdrachtfilter">Titel:</label>
+      <input type="text" id="opdrachtfilter" class="form-control"
+             name="opdrachtfilter"
+             #opdrachtfilter="ngModel"
+             [(ngModel)]="filterValue" (keyup)="filterOpdrachten()"/>
+    </div>
+  </form>
   <app-opdracht-item class="{{ elementClass }}"
-                     *ngFor="let opdracht of opdrachtList | slice:0:limit; let i = index"
+                     *ngFor="let opdracht of opdrachtenList | slice:0:limit; let i = index"
                      [item]="opdracht"
                      [index]="i"
                      [aanpasbaar]="aanpasbaar">

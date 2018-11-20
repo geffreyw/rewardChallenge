@@ -4,17 +4,18 @@
 
  */
 
-$orange : #FFA100;
-$green : #79C347;
-$blue : #00A6DD;
-$dark : #292b2c;
-$light-bg : #f4f4f4;
+$orange : #f49900;
+$green : #71b643;
+$blue : #08ace1;
+$dark : #333e47;
+$light : #f4f4f4;
 $grey : #464a4c;
 
 $theme-colors: (
   'primary' : $orange,
   'secondary' : $green,
-  'light': $light-bg
+  'light': $light,
+  'dark': $dark
 );
 
 // Link naar BS en FA
@@ -24,7 +25,7 @@ $theme-colors: (
 
 /* Belangrijkste code */
 body{
-  background-color: $light-bg;
+  background-color: $light;
   color: $dark;
 
 }
