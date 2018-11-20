@@ -1,6 +1,6 @@
 <div class="row">
-  <app-reward-item class="col-12 col-md-6 col-lg-4"
-                     *ngFor="let reward of rewardList; let i = index"
+  <app-reward-item class="{{ elementClass }}"
+                     *ngFor="let reward of rewardList | slice:0:limit; let i = index"
                      [item]="reward"
                      [index]="i"
                     [aanpasbaar]="aanpasbaar">

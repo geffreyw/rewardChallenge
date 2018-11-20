@@ -1,7 +1,7 @@
 <div class="row">
   <app-opdracht-item class="{{ elementClass }}"
-                     *ngFor="let opracht of opdrachtList; let i = index"
-                     [item]="opracht"
+                     *ngFor="let opdracht of opdrachtList | slice:0:limit; let i = index"
+                     [item]="opdracht"
                      [index]="i"
                      [aanpasbaar]="aanpasbaar">
   </app-opdracht-item>

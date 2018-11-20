@@ -11,6 +11,8 @@ export class OpdrachtListComponent implements OnInit {
 
   @Input() aanpasbaar: boolean;
   @Input() elementClass: string;
+  @Input() limit: string;
+
 
   opdrachtList: Opdracht[];
 
