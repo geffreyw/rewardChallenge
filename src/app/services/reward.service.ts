@@ -1,55 +1,28 @@
 import {Injectable} from '@angular/core';
 import {Reward} from '../interfaces/reward';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {map, share} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RewardService {
 
-  rewardList: Reward[] = [
-    {
-      rewardID: '1',
-      titel: 'Euro deal',
-      omschrijving: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda doloribus exercitationem, expedita explicabo ipsum molestiae, nam natus nemo quae quia quis quod, rem sit sunt unde vero!',
-      short: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda',
-      punten: 1
-    },
-    {
-      rewardID: '2',
-      titel: 'Bak bier',
-      omschrijving: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda doloribus exercitationem, expedita explicabo ipsum molestiae, nam natus nemo quae quia quis quod, rem sit sunt unde vero!',
-      short: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda',
-      punten: 5
-    },
-    {
-      rewardID: '3',
-      titel: 'Mcdo Chicken nuggets',
-      omschrijving: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda doloribus exercitationem, expedita explicabo ipsum molestiae, nam natus nemo quae quia quis quod, rem sit sunt unde vero!',
-      short: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda',
-      punten: 10
-    },
-    {
-      rewardID: '4',
-      titel: 'Reis naar benidorm',
-      omschrijving: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda doloribus exercitationem, expedita explicabo ipsum molestiae, nam natus nemo quae quia quis quod, rem sit sunt unde vero!',
-      short: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci architecto assumenda',
-      punten: 50
-    },
-  ];
+  readonly TASKS_URL = 'http://54.38.35.163:6969/rewards';
+  rewards$: Observable<any>;
 
-  constructor() {
-  }
-
-  // CRUD operaties: Create, (Read), Update, Delete
-  createItem(item: Reward) {
-    this.rewardList.push(item);
-  }
-
-  updateItem(item: Reward, i: number) {
-    this.rewardList[i] = item;
-  }
-
-  deleteItem(i: number) {
-    this.rewardList.splice(i, 1);
+  constructor(private http: HttpClient) {
+    console.log('HttpClient');
+    this.rewards$ = this.http.get<Reward[]>(this.TASKS_URL).pipe(
+      map(rewards => {
+        for (const reward of rewards) {
+          reward.description = 'Dit is een testopdracht met een test description. Ik ben aan het wachten op de api om de description te fixen.';
+          reward.short = `${reward.description.substring(0, 15).trim()}...`;
+        }
+        return rewards;
+      }),
+      share()
+    );
   }
 }

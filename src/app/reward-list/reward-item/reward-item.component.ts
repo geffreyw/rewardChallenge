@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Reward} from '../../interfaces/reward';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-reward-item',
   templateUrl: './reward-item.component.html',
-  styleUrls: ['./reward-item.component.scss']
+  styles: []
 })
 export class RewardItemComponent implements OnInit {
 
@@ -14,7 +14,7 @@ export class RewardItemComponent implements OnInit {
   @Input() aanpasbaar = false;
 
   showMore = false;
-  userPunten = 6;
+  userPunten = 20;
 
   getReward() {
     if (confirm('Wil je je prijs claimen?')) {

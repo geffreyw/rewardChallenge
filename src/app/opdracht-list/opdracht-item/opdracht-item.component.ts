@@ -5,7 +5,7 @@ import {Opdracht} from '../../interfaces/opdracht';
 @Component({
   selector: 'app-opdracht-item',
   templateUrl: './opdracht-item.component.html',
-  styleUrls: ['./opdracht-item.component.scss']
+  styles: []
 })
 export class OpdrachtItemComponent implements OnInit {
 

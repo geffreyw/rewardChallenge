@@ -1,9 +1,4 @@
 // Overschrijf BS variabelen en mixins
-/*
-
-
- */
-
 $orange : #f49900;
 $green : #71b643;
 $blue : #08ace1;
@@ -22,13 +17,19 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-
-/* Belangrijkste code */
+/* Main */
 body{
   background-color: $light;
   color: $dark;
-
 }
+.btn {
+  cursor: pointer;
+}
+
+a:hover, a:focus{
+  text-decoration: none;
+}
+
 /*  header */
 .bg-gradient-blue{
   background: linear-gradient(to bottom,#0078d7 0%,$blue);
@@ -48,22 +49,9 @@ body{
   .text-muted{
     color: rgba(255,255,255,0.6) !important;
   }
-
 }
 
-// Eigen code/partials
-.btn {
-  cursor: pointer;
-}
-
-a:hover, a:focus{
-  text-decoration: none;
-}
-
-/*  cards */
-
-
-/*  nav-tabs   */
+/*  Navbar   */
 .navbar-nav{
   border-bottom: none;
 }

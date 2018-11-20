@@ -15,11 +15,13 @@ import { environment } from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
+  // are to make directives (including components and pipes) from the current module available to other directives in the current module.
   declarations: [
     AppComponent,
-    NavbarComponent
-  ],
-  imports: [
+    NavbarComponent],
+
+    // makes the exported declarations of other modules available in the current module
+    imports: [
     BrowserModule,
     AppRoutingModule,
     NgBootstrapModule,
@@ -29,6 +31,7 @@ import {HttpClientModule} from '@angular/common/http';
     LoginModule,
     ErrorModule,
     AdminModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

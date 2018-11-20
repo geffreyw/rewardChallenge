@@ -1,11 +1,13 @@
-import {Component, Input, OnInit, Pipe} from '@angular/core';
+import {Component, Input, OnInit, Pipe, OnDestroy} from '@angular/core';
 import {Reward} from '../interfaces/reward';
 import {RewardService} from '../services/reward.service';
+import {Subscription} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-reward-list',
   templateUrl: './reward-list.component.html',
-  styleUrls: ['./reward-list.component.scss']
+  styles: []
 })
 export class RewardListComponent implements OnInit {
 
@@ -14,14 +16,21 @@ export class RewardListComponent implements OnInit {
   @Input() limit: string;
 
   rewardList: Reward[];
-  filterargs = {punten: '5'};
 
-  constructor(
-    private rewardService: RewardService
-  ) { }
+  readonly REWARDS_URL = 'http://54.38.35.163:6969/rewards';
+  subscription: Subscription;
+
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit() {
-    this.rewardList = this.rewardService.rewardList;
+    this.subscription = this.http.get<any[]>(this.REWARDS_URL).subscribe( rewards => {
+      this.rewardList = rewards;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

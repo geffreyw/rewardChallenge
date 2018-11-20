@@ -3,16 +3,16 @@
     <div class="card-text">
       <div class="row">
         <div class="col-9 col-md-12 text-primary">
-          <b>{{ item.titel }}</b>
+          <b>{{ item.name }}</b>
         </div>
         <div class="col-auto ml-auto ml-md-0">
           <div class="punt">
-            <p>{{ item.punten }} <i class="fas fa-coins"></i></p>
+            <p>{{ item.points }} <i class="fas fa-coins"></i></p>
           </div>
         </div>
       </div>
       <p *ngIf="!showMore">{{ item.short }}...</p>
-      <p *ngIf="showMore">{{ item.omschrijving }}</p>
+      <p *ngIf="showMore">{{ item.description }}</p>
       <div class="row">
         <div class="mx-auto">
           <button class="btn btn-link"
@@ -29,12 +29,12 @@
       <button type="button"
               class="btn btn-link btn-cancel"
               *ngIf="aanpasbaar"><i class="fas fa-times"></i></button>-->
-      <div class="progress" *ngIf="(userPunten / item.punten) <1">
-        <div class="progress-bar-striped bg-warning" role="progressbar" [ngStyle]="{'width': (userPunten / item.punten)*100 + '%'} " aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ (userPunten / item.punten)*100 }}%</div>
+      <div class="progress" *ngIf="(userPunten / item.points) <1">
+        <div class="progress-bar-striped bg-warning" role="progressbar" [ngStyle]="{'width': (userPunten / item.points)*100 + '%'} " aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ (userPunten / item.points)*100 }}%</div>
       </div>
       <div class="row">
-        <div class="mx-auto" *ngIf="(userPunten / item.punten) >=1">
-          <button (click)="getReward(item.rewardID)" type="button" class=" btn btn-outline-secondary"><i class="fas fa-award"></i> Ophalen</button>
+        <div class="mx-auto" *ngIf="(userPunten / item.points) >=1">
+          <button (click)="getReward(item.rewardID)" type="button" class=" btn btn-outline-secondary"><i class="fas fa-award"></i> Claim</button>
         </div>
       </div>
       <button class="btn btn-link btn-edit"
