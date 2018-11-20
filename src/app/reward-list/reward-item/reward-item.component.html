@@ -29,6 +29,14 @@
       <button type="button"
               class="btn btn-link btn-cancel"
               *ngIf="aanpasbaar"><i class="fas fa-times"></i></button>-->
+      <div class="progress" *ngIf="(userPunten / item.punten) <1">
+        <div class="progress-bar-striped bg-warning" role="progressbar" [ngStyle]="{'width': (userPunten / item.punten)*100 + '%'} " aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ (userPunten / item.punten)*100 }}%</div>
+      </div>
+      <div class="row">
+        <div class="mx-auto" *ngIf="(userPunten / item.punten) >=1">
+          <button (click)="getReward(item.rewardID)" type="button" class=" btn btn-outline-secondary"><i class="fas fa-award"></i> Ophalen</button>
+        </div>
+      </div>
       <button class="btn btn-link btn-edit"
               *ngIf="aanpasbaar"><i class="fas fa-pencil-alt"></i></button>
       <button class="btn btn-link btn-del"

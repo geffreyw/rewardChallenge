@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Pipe} from '@angular/core';
 import {Reward} from '../interfaces/reward';
 import {RewardService} from '../services/reward.service';
 
@@ -14,6 +14,7 @@ export class RewardListComponent implements OnInit {
   @Input() limit: string;
 
   rewardList: Reward[];
+  filterargs = {punten: '5'};
 
   constructor(
     private rewardService: RewardService

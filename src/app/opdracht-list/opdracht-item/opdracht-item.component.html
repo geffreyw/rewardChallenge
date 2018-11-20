@@ -21,8 +21,11 @@
           <button class="btn btn-link"
                   *ngIf="showMore"
                   (click)="showMore=false">- Minder</button>
+
         </div>
+        <button *ngIf="showMore" type="button" class=" mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Voltooi</button>
       </div>
+
       <!--<button type="button"
               class="btn btn-link btn-edit"
               *ngIf="aanpasbaar"><i class="fas fa-save"></i></button>
