@@ -3,16 +3,16 @@
     <div class="card-text">
       <div class="row">
         <div class="col-9 col-md-12 text-primary">
-          <b>{{ item.titel }}</b>
+          <b>{{ item.name }}</b>
         </div>
         <div class="col-auto ml-auto ml-md-0">
           <div class="punt">
-            <p>{{ item.punten }} <i class="fas fa-coins"></i></p>
+            <p>{{ item.points }} <i class="fas fa-coins"></i></p>
           </div>
         </div>
       </div>
       <p *ngIf="!showMore">{{ item.short }}...</p>
-      <p *ngIf="showMore">{{ item.omschrijving }}</p>
+      <p *ngIf="showMore">{{ item?.description }}</p>
       <div class="row">
         <div class="mx-auto">
           <button class="btn btn-link"
@@ -29,9 +29,9 @@
       <button type="button"
               class="btn btn-link btn-cancel"
               *ngIf="aanpasbaar"><i class="fas fa-times"></i></button>-->
-      <button class="btn btn-link btn-edit"
+      <button class="btn btn-link btn-edit text-dark"
               *ngIf="aanpasbaar"><i class="fas fa-pencil-alt"></i></button>
-      <button class="btn btn-link btn-del"
+      <button class="btn btn-link btn-del text-dark"
               *ngIf="aanpasbaar"><i class="fas fa-trash"></i></button>
       <!--todo knoppen voor edit maken-->
     </div>

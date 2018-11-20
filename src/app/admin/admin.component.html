@@ -1,6 +1,15 @@
-<div class="container">
+<div class="container mt-2">
   <div class="row">
-    <app-opdracht-list [aanpasbaar]="true" [elementClass]="'col-12'" class="col-12 col-md-6 mt-2"></app-opdracht-list>
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-dark">Opdrachten</h3>
+          <div class="card-text">
+            <app-opdracht-list [aanpasbaar]="true" [elementClass]="'col-12'" class="mt-2"></app-opdracht-list>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

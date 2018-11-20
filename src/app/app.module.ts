@@ -12,6 +12,7 @@ import { AdminModule } from './admin/admin.module';
 import {SharedModule} from './sharedModules/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     NgBootstrapModule,
+    HttpClientModule,
     SharedModule,
     UserModule,
     LoginModule,

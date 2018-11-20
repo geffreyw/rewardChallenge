@@ -1,7 +1,7 @@
 export class Opdracht {
-  opdrachtId: String;
-  titel: String;
-  omschrijving: String;
+  _id: String;
+  name: String;
+  description: String;
   short: String;
-  punten: number;
+  points: number;
 }

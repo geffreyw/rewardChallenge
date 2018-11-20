@@ -5,10 +5,12 @@ import {OpdrachtItemComponent} from '../opdracht-list/opdracht-item/opdracht-ite
 
 import {RewardListComponent} from '../reward-list/reward-list.component';
 import {RewardItemComponent} from '../reward-list/reward-item/reward-item.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule
   ],
   exports: [
     OpdrachtListComponent,
