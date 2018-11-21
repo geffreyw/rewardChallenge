@@ -14,6 +14,18 @@ export class RewardItemComponent implements OnInit {
   @Input() aanpasbaar = false;
 
   showMore = false;
+  userPunten = 6;
+
+  getReward() {
+    if (confirm('Wil je je prijs claimen?')) {
+
+      console.log('prijs ophalen');
+
+    }
+
+}
+
+
   constructor() { }
 
   ngOnInit() {

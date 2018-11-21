@@ -81,3 +81,7 @@ a:hover, a:focus{
   border: none;
 }
 
+.progress-bar{
+  width: 0;
+  transition: width 2s;
+}
