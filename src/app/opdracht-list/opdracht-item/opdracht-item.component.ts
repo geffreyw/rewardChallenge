@@ -15,17 +15,32 @@ export class OpdrachtItemComponent implements OnInit {
   @Input() aanpasbaar = false;
 
   @Output() delete = new EventEmitter();
+  @Output() update = new EventEmitter();
 
   showMore = false;
-  constructor(public opdrachtService: OpdrachtService) { }
+  editOpdracht = false;
+
+  opdrachtEdit: Opdracht;
+  constructor(public opdrachtService: OpdrachtService) {  }
 
   ngOnInit() {
+    this.opdrachtEdit = Object.assign({}, this.item);
   }
 
   deleteOpdracht() {
     this.delete.emit();
   }
 
+  clearEdit() {
+    this.opdrachtEdit = Object.assign({}, this.item);
+    this.editOpdracht = false;
+  }
 
+  updateOpdracht() {
+    this.opdrachtService.updateOpdracht(this.opdrachtEdit).subscribe(opdracht => {
+      this.update.emit();
+    });
+    this.clearEdit();
+  }
 
 }

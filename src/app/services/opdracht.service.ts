@@ -13,6 +13,8 @@ export class OpdrachtService {
   authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjQxYTdhZTcxNzlhNTZlMjEzNmQzOSIsImVtYWlsIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ0YXNrcyI6W10sInJld2FyZHMiOltdfSwiaWF0IjoxNTQyNzg5MzQ1LCJleHAiOjE1NDI4NzU3NDV9.vK8Qx5Adi5A8bKBgMLAGinjpHUduJMuHW9Foc0Dzjp8';
   opdrachten$: Observable<any>;
 
+  readonly lengteShort = 30;
+
   constructor(private http: HttpClient) {
     // this.readOpdrachten();
     // this.addOpdracht(new Opdracht());
@@ -22,7 +24,9 @@ export class OpdrachtService {
     return this.http.get<Opdracht[]>(this.TASKS_URL).pipe(
       map( opdrachten => {
         for (const opdracht of opdrachten) {
-          opdracht.short = `${opdracht.description.substring(0, 15).trim()}...`;
+          if (opdracht.description.length >= this.lengteShort) {
+            opdracht.short = `${opdracht.description.substring(0, 15).trim()}...`;
+          }
         }
         return opdrachten;
       }),
@@ -66,6 +70,18 @@ export class OpdrachtService {
       })
     };
     return this.http.delete(this.TASKS_URL + '/' + id, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateOpdracht(opdracht: Opdracht): Observable<Opdracht> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken
+      })
+    };
+    return this.http.put<Opdracht>(this.TASKS_URL + '/' + opdracht._id, opdracht , httpOptions).pipe(
       catchError(this.handleError)
     );
   }

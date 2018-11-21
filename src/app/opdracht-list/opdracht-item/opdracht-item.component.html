@@ -1,42 +1,101 @@
-<div class="card m-2 shadow">
+<div class="card my-2 shadow">
   <div class="card-body">
     <div class="card-text">
-      <div class="row">
-        <div class="col-9 col-md-12 text-primary">
-          <b>{{ item.name }}</b>
-        </div>
-        <div class="col-auto ml-auto ml-md-0">
-          <div class="punt">
-            <p>{{ item.points }} <i class="fas fa-coins"></i></p>
+      <form #opdrachtAddForm="ngForm" (submit)="updateOpdracht()" *ngIf="editOpdracht">
+        <div class="form-row">
+          <div class="form-group col-9">
+            <label for="name">Name:</label>
+            <input type="text" id="name" class="form-control"
+                   [class.is-valid]="name.touched && name.valid"
+                   [class.is-invalid]="name.touched && name.invalid"
+                   required
+                   minlength="3"
+                   name="name"
+                   #name="ngModel"
+                   [(ngModel)]="opdrachtEdit.name"/>
+            <div *ngIf="name.errors  && (name.touched || name.dirty)" class="text-danger">
+              <small *ngIf="name.errors['required']">Vul een titel in!</small>
+              <small *ngIf="name.errors['minlength']">Een titel moet minstens <b>{{name.errors['minlength'].requiredLength}}</b> tekens bevatten!</small>
+            </div>
+          </div>
+          <div class="form-group col-3">
+            <label for="points">Punten:</label>
+            <input type="number" id="points" class="form-control"
+                   [class.is-valid]="points.touched && points.valid"
+                   [class.is-invalid]="points.touched && points.invalid"
+                   required
+                   name="points"
+                   #points="ngModel"
+                   [(ngModel)]="opdrachtEdit.points"/>
+            <div *ngIf="points.errors  && (points.touched || points.dirty)" class="text-danger">
+              <small *ngIf="points.errors['required']">Vul een titel in!</small>
+            </div>
           </div>
         </div>
-      </div>
-      <p *ngIf="!showMore">{{ item.short }}...</p>
-      <p *ngIf="showMore">{{ item?.description }}</p>
-      <div class="row">
-        <div class="mx-auto">
-          <button class="btn btn-link"
-                  *ngIf="!showMore"
-                  (click)="showMore=true">+ Meer</button>
-          <button class="btn btn-link"
-                  *ngIf="showMore"
-                  (click)="showMore=false">- Minder</button>
-
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea type="text" id="description" class="form-control"
+                    [class.is-valid]="description.touched && description.valid"
+                    [class.is-invalid]="description.touched && description.invalid"
+                    required
+                    minlength="10"
+                    name="description"
+                    #description="ngModel"
+                    [(ngModel)]="opdrachtEdit.description"></textarea>
+          <div *ngIf="description.errors  && (description.touched || description.dirty)" class="text-danger">
+            <small *ngIf="description.errors['required']">Vul een titel in!</small>
+            <small *ngIf="description.errors['minlength']">Een titel moet minstens <b>{{description.errors['minlength'].requiredLength}}</b> tekens bevatten!</small>
+          </div>
         </div>
-        <button *ngIf="showMore" type="button" class=" mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Voltooi</button>
+        <div class="form-row">
+          <div class="col-auto ">
+            <button type="submit" class="btn btn-dark"
+                    [disabled]="opdrachtAddForm.invalid">Opslaan</button>
+          </div>
+        </div>
+      </form>
+      <div *ngIf="!editOpdracht">
+        <div class="row">
+          <div class="col-9 col-md-12 text-primary">
+            <b>{{ item.name }}</b>
+          </div>
+          <div class="col-auto ml-auto ml-md-0">
+            <div class="punt">
+              <p>{{ item.points }} <i class="fas fa-coins"></i></p>
+            </div>
+          </div>
+        </div>
+        <p *ngIf="showMore || !item.short">{{ item.description }}</p>
+        <div *ngIf="item.short">
+          <p *ngIf="!showMore">{{ item.short }}...</p>
+          <div class="row">
+            <div class="mx-auto">
+              <button class="btn btn-link"
+                      *ngIf="!showMore"
+                      (click)="showMore=true">+ Meer</button>
+              <button class="btn btn-link"
+                      *ngIf="showMore"
+                      (click)="showMore=false">- Minder</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <button *ngIf="!aanpasbaar" type="button" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Voltooi</button>
+        </div>
       </div>
-
-      <!--<button type="button"
-              class="btn btn-link btn-edit"
-              *ngIf="aanpasbaar"><i class="fas fa-save"></i></button>
-      <button type="button"
-              class="btn btn-link btn-cancel"
-              *ngIf="aanpasbaar"><i class="fas fa-times"></i></button>-->
-      <button class="btn btn-link btn-edit text-dark"
-              *ngIf="aanpasbaar"><i class="fas fa-pencil-alt"></i></button>
-      <button class="btn btn-link btn-del text-dark"
-              *ngIf="aanpasbaar" (click)="deleteOpdracht()"><i class="fas fa-trash"></i></button>
-      <!--todo knoppen voor edit maken-->
+      <div *ngIf="aanpasbaar" class="row">
+        <div class="ml-auto">
+          <button type="button"
+                  class="btn btn-link btn-cancel"
+                  *ngIf="editOpdracht"
+                  (click)="clearEdit()"><i class="fas fa-times text-dark"></i></button>
+          <button class="btn btn-link btn-edit text-dark"
+                  *ngIf="!editOpdracht"
+                  (click)="editOpdracht=true"><i class="fas fa-pencil-alt"></i></button>
+          <button class="btn btn-link btn-del text-dark"
+                  (click)="deleteOpdracht()"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

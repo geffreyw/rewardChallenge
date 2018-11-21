@@ -22,6 +22,8 @@ export class OpdrachtListComponent implements OnInit {
 
   newOpdracht: Opdracht = new Opdracht();
 
+  showNew = false;
+
   subscription: Subscription;
 
   constructor(private opdrachtService: OpdrachtService) {
@@ -53,11 +55,17 @@ export class OpdrachtListComponent implements OnInit {
     this.opdrachtService.addOpdracht(this.newOpdracht).subscribe(() =>
       this.readOpdrachten()
     );
+    this.clearNewOpdracht();
   }
 
   deleteOpdracht(opdracht: Opdracht) {
     this.opdrachtenList = this.opdrachtenList.filter(o => o !== opdracht);
     this.opdrachtService.deleteOpdracht(opdracht._id).subscribe();
+  }
+
+  clearNewOpdracht() {
+    this.showNew = false;
+    this.newOpdracht = new Opdracht();
   }
 
 }

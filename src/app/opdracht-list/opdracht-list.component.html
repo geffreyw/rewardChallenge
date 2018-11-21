@@ -1,44 +1,91 @@
 <div class="row">
-  <form #opdrachtAddForm="ngForm" (submit)="addOpdracht()" *ngIf="aanpasbaar" class="col-12">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" id="name" class="form-control"
-             name="name"
-             #name="ngModel"
-             [(ngModel)]="newOpdracht.name"/>
+  <div class="col-12">
+    <form #opdrachtfilterForm="ngForm" *ngIf="filter">
+      <div class="form-group">
+        <label for="opdrachtfilter">Zoeken:</label>
+        <input type="text" id="opdrachtfilter" class="form-control"
+               name="opdrachtfilter"
+               #opdrachtfilter="ngModel"
+               [(ngModel)]="filterValue" (keyup)="filterOpdrachten()"/>
+      </div>
+    </form>
+  </div>
+  <div class="col-12" *ngIf="aanpasbaar">
+    <button class="btn btn-dark" *ngIf="!showNew" (click)="showNew=true">+ Nieuw</button>
+    <div class="card shadow" *ngIf="showNew">
+      <div class="card-body">
+        <b class="card-title text-primary">Nieuwe opdracht</b>
+        <form #opdrachtAddForm="ngForm" (submit)="addOpdracht()" *ngIf="aanpasbaar" class="col-12">
+          <div class="form-row">
+            <div class="form-group col-9">
+              <label for="name">Name:</label>
+              <input type="text" id="name" class="form-control"
+                     [class.is-valid]="name.touched && name.valid"
+                     [class.is-invalid]="name.touched && name.invalid"
+                     required
+                     minlength="3"
+                     name="name"
+                     #name="ngModel"
+                     [(ngModel)]="newOpdracht.name"/>
+              <div *ngIf="name.errors  && (name.touched || name.dirty)" class="text-danger">
+                <small *ngIf="name.errors['required']">Vul een titel in!</small>
+                <small *ngIf="name.errors['minlength']">Een titel moet minstens <b>{{name.errors['minlength'].requiredLength}}</b> tekens bevatten!</small>
+              </div>
+            </div>
+            <div class="form-group col-3">
+              <label for="points">Punten:</label>
+              <input type="number" id="points" class="form-control"
+                     [class.is-valid]="points.touched && points.valid"
+                     [class.is-invalid]="points.touched && points.invalid"
+                     required
+                     name="points"
+                     #points="ngModel"
+                     [(ngModel)]="newOpdracht.points"/>
+              <div *ngIf="points.errors  && (points.touched || points.dirty)" class="text-danger">
+                <small *ngIf="points.errors['required']">Vul een titel in!</small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea type="text" id="description" class="form-control"
+                      [class.is-valid]="description.touched && description.valid"
+                      [class.is-invalid]="description.touched && description.invalid"
+                      required
+                      minlength="10"
+                      name="description"
+                      #description="ngModel"
+                      [(ngModel)]="newOpdracht.description"></textarea>
+            <div *ngIf="description.errors  && (description.touched || description.dirty)" class="text-danger">
+              <small *ngIf="description.errors['required']">Vul een titel in!</small>
+              <small *ngIf="description.errors['minlength']">Een titel moet minstens <b>{{description.errors['minlength'].requiredLength}}</b> tekens bevatten!</small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-auto ml-auto">
+              <button type="submit" class="btn btn-dark"
+                      [disabled]="opdrachtAddForm.invalid">Opslaan</button>
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-secondary" (click)="clearNewOpdracht()">Annuleren</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="points">Punten:</label>
-      <input type="number" id="points" class="form-control"
-             name="points"
-             #points="ngModel"
-             [(ngModel)]="newOpdracht.points"/>
+  </div>
+  <div class="col-12 mt-2">
+    <div class="row">
+      <app-opdracht-item class="{{ elementClass }}"
+                         *ngFor="let opdracht of opdrachtenList | slice:0:limit; let i = index"
+                         [item]="opdracht"
+                         [index]="i"
+                         [aanpasbaar]="aanpasbaar"
+                         (delete)="deleteOpdracht(opdracht)"
+                         (update)="readOpdrachten()">
+      </app-opdracht-item>
     </div>
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <input type="text" id="description" class="form-control"
-             name="description"
-             #description="ngModel"
-             [(ngModel)]="newOpdracht.description"/>
-    </div>
-    <button>submit</button>
-  </form>
-  <form #opdrachtfilterForm="ngForm" *ngIf="filter" class="col-12">
-    <div class="form-group">
-      <label for="opdrachtfilter">Zoeken:</label>
-      <input type="text" id="opdrachtfilter" class="form-control"
-             name="opdrachtfilter"
-             #opdrachtfilter="ngModel"
-             [(ngModel)]="filterValue" (keyup)="filterOpdrachten()"/>
-    </div>
-  </form>
-  <app-opdracht-item class="{{ elementClass }}"
-                     *ngFor="let opdracht of opdrachtenList | slice:0:limit; let i = index"
-                     [item]="opdracht"
-                     [index]="i"
-                     [aanpasbaar]="aanpasbaar"
-                     (delete)="deleteOpdracht(opdracht)">
-  </app-opdracht-item>
+  </div>
   <!--<div class="col-12">
     <pre>{{ (opdrachtenList | json) }}</pre>
   </div>-->
