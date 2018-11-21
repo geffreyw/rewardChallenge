@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Reward} from '../../interfaces/reward';
+import {RewardService} from '../../services/reward.service';
 
 
 @Component({
@@ -13,22 +14,35 @@ export class RewardItemComponent implements OnInit {
   @Input() index: number;
   @Input() aanpasbaar = false;
 
+  @Output() delete = new EventEmitter();
+  @Output() update = new EventEmitter();
+
   showMore = false;
+  editReward = false;
   userPunten = 6;
 
-  getReward() {
-    if (confirm('Wil je je prijs claimen?')) {
+  rewardEdit: Reward;
 
-      console.log('prijs ophalen');
-
-    }
-
-}
-
-
-  constructor() { }
+  constructor(private rewardService: RewardService) { }
 
   ngOnInit() {
+    this.rewardEdit = Object.assign({}, this.item);
+  }
+
+  deleteReward() {
+    this.delete.emit();
+  }
+
+  clearEdit() {
+    this.rewardEdit = Object.assign({}, this.item);
+    this.editReward = false;
+  }
+
+  updateReward() {
+    this.rewardService.updateReward(this.rewardEdit).subscribe(opdracht => {
+      this.update.emit();
+    });
+    this.clearEdit();
   }
 
 }

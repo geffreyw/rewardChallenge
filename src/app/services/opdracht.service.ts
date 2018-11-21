@@ -11,13 +11,10 @@ export class OpdrachtService {
 
   readonly TASKS_URL = 'https://hidden-citadel-73667.herokuapp.com/tasks';
   authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjQxYTdhZTcxNzlhNTZlMjEzNmQzOSIsImVtYWlsIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ0YXNrcyI6W10sInJld2FyZHMiOltdfSwiaWF0IjoxNTQyNzg5MzQ1LCJleHAiOjE1NDI4NzU3NDV9.vK8Qx5Adi5A8bKBgMLAGinjpHUduJMuHW9Foc0Dzjp8';
-  opdrachten$: Observable<any>;
 
   readonly lengteShort = 30;
 
   constructor(private http: HttpClient) {
-    // this.readOpdrachten();
-    // this.addOpdracht(new Opdracht());
   }
 
   getOpdrachten(): Observable<Opdracht[]> {

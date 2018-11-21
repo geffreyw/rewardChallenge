@@ -24,8 +24,6 @@ export class OpdrachtListComponent implements OnInit {
 
   showNew = false;
 
-  subscription: Subscription;
-
   constructor(private opdrachtService: OpdrachtService) {
     this.readOpdrachten();
   }
