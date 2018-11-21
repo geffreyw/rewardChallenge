@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-userinfo',
   templateUrl: './userinfo.component.html',
-  styles: []
+  styleUrls: ['./userinfo.component.scss']
 })
 export class UserinfoComponent implements OnInit {
 

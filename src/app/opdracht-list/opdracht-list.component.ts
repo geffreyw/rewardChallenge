@@ -7,7 +7,7 @@ import {filter} from 'rxjs/operators';
 @Component({
   selector: 'app-opdracht-list',
   templateUrl: './opdracht-list.component.html',
-  styles: []
+  styleUrls: ['./opdracht-list.component.scss']
 })
 export class OpdrachtListComponent implements OnInit, OnDestroy {
 

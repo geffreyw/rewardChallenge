@@ -1,7 +1,7 @@
 export class Reward {
   rewardID: String;
-  name: String;
-  description: String;
+  titel: String;
+  omschrijving: String;
   short: String;
-  points: number;
+  punten: number;
 }
