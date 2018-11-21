@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Opdracht} from '../../interfaces/opdracht';
+import {OpdrachtService} from '../../services/opdracht.service';
 
 
 @Component({
@@ -13,10 +14,18 @@ export class OpdrachtItemComponent implements OnInit {
   @Input() index: number;
   @Input() aanpasbaar = false;
 
+  @Output() delete = new EventEmitter();
+
   showMore = false;
-  constructor() { }
+  constructor(public opdrachtService: OpdrachtService) { }
 
   ngOnInit() {
   }
+
+  deleteOpdracht() {
+    this.delete.emit();
+  }
+
+
 
 }

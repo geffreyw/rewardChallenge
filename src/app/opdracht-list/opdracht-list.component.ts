@@ -9,7 +9,7 @@ import {filter} from 'rxjs/operators';
   templateUrl: './opdracht-list.component.html',
   styleUrls: ['./opdracht-list.component.scss']
 })
-export class OpdrachtListComponent implements OnInit, OnDestroy {
+export class OpdrachtListComponent implements OnInit {
 
   @Input() aanpasbaar: boolean;
   @Input() elementClass: string;
@@ -19,30 +19,44 @@ export class OpdrachtListComponent implements OnInit, OnDestroy {
   opdrachtenList: Opdracht[];
   filterValue: string;
 
+  newOpdracht: Opdracht = new Opdracht();
+
   subscription: Subscription;
 
-  constructor(public opdrachtService: OpdrachtService) {
-    this.filterOpdrachten();
+  constructor(private opdrachtService: OpdrachtService) {
+    this.readOpdrachten();
   }
 
   ngOnInit() {
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  readOpdrachten() {
+    this.opdrachtService.getOpdrachten().subscribe(
+      (opdrachten: Opdracht[]) => this.opdrachtenList = opdrachten,
+      error => console.error('Observer got an error: ' + error)
+    );
   }
 
   filterOpdrachten() {
-    this.subscription = this.opdrachtService.opdrachten$.subscribe(
-      opdrachten => {
-        if (this.filterValue) {
-          this.opdrachtenList = opdrachten.filter( o => o.name.toLowerCase().indexOf(this.filterValue.toLowerCase()) >= 0);
-        } else {
-          this.opdrachtenList = opdrachten;
-        }
-      },
-      error => console.log(error),
+    if (this.filterValue) {
+      this.opdrachtService.zoekOpdracht(this.filterValue).subscribe(
+        (opdrachten: Opdracht[]) => this.opdrachtenList = opdrachten,
+        error => console.error('Observer got an error: ' + error)
+      );
+    } else {
+      this.readOpdrachten();
+    }
+  }
+
+  addOpdracht() {
+    this.opdrachtService.addOpdracht(this.newOpdracht).subscribe(() =>
+      this.readOpdrachten()
     );
+  }
+
+  deleteOpdracht(opdracht: Opdracht) {
+    this.opdrachtenList = this.opdrachtenList.filter(o => o !== opdracht);
+    this.opdrachtService.deleteOpdracht(opdracht._id).subscribe();
   }
 
 }

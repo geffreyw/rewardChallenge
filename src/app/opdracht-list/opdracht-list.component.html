@@ -1,7 +1,31 @@
 <div class="row">
+  <form #opdrachtAddForm="ngForm" (submit)="addOpdracht()" class="col-12">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" class="form-control"
+             name="name"
+             #name="ngModel"
+             [(ngModel)]="newOpdracht.name"/>
+    </div>
+    <div class="form-group">
+      <label for="points">Punten:</label>
+      <input type="number" id="points" class="form-control"
+             name="points"
+             #points="ngModel"
+             [(ngModel)]="newOpdracht.points"/>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" id="description" class="form-control"
+             name="description"
+             #description="ngModel"
+             [(ngModel)]="newOpdracht.description"/>
+    </div>
+    <button>submit</button>
+  </form>
   <form #opdrachtfilterForm="ngForm" class="col-12">
     <div class="form-group">
-      <label for="opdrachtfilter">Titel:</label>
+      <label for="opdrachtfilter">Zoeken:</label>
       <input type="text" id="opdrachtfilter" class="form-control"
              name="opdrachtfilter"
              #opdrachtfilter="ngModel"
@@ -12,6 +36,10 @@
                      *ngFor="let opdracht of opdrachtenList | slice:0:limit; let i = index"
                      [item]="opdracht"
                      [index]="i"
-                     [aanpasbaar]="aanpasbaar">
+                     [aanpasbaar]="aanpasbaar"
+                     (delete)="deleteOpdracht(opdracht)">
   </app-opdracht-item>
+  <div class="col-12">
+    <pre>{{ (opdrachtenList | json) }}</pre>
+  </div>
 </div>

@@ -32,7 +32,7 @@
       <button class="btn btn-link btn-edit text-dark"
               *ngIf="aanpasbaar"><i class="fas fa-pencil-alt"></i></button>
       <button class="btn btn-link btn-del text-dark"
-              *ngIf="aanpasbaar"><i class="fas fa-trash"></i></button>
+              *ngIf="aanpasbaar" (click)="deleteOpdracht()"><i class="fas fa-trash"></i></button>
       <!--todo knoppen voor edit maken-->
     </div>
   </div>
