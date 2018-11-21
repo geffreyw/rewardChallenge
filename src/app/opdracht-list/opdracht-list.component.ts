@@ -12,6 +12,7 @@ import {filter} from 'rxjs/operators';
 export class OpdrachtListComponent implements OnInit {
 
   @Input() aanpasbaar: boolean;
+  @Input() filter: boolean;
   @Input() elementClass: string;
   @Input() limit: string;
 

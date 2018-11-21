@@ -1,5 +1,5 @@
 <div class="row">
-  <form #opdrachtAddForm="ngForm" (submit)="addOpdracht()" class="col-12">
+  <form #opdrachtAddForm="ngForm" (submit)="addOpdracht()" *ngIf="aanpasbaar" class="col-12">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" id="name" class="form-control"
@@ -23,7 +23,7 @@
     </div>
     <button>submit</button>
   </form>
-  <form #opdrachtfilterForm="ngForm" class="col-12">
+  <form #opdrachtfilterForm="ngForm" *ngIf="filter" class="col-12">
     <div class="form-group">
       <label for="opdrachtfilter">Zoeken:</label>
       <input type="text" id="opdrachtfilter" class="form-control"
@@ -39,7 +39,7 @@
                      [aanpasbaar]="aanpasbaar"
                      (delete)="deleteOpdracht(opdracht)">
   </app-opdracht-item>
-  <div class="col-12">
+  <!--<div class="col-12">
     <pre>{{ (opdrachtenList | json) }}</pre>
-  </div>
+  </div>-->
 </div>
