@@ -23,6 +23,8 @@ export class RewardListComponent implements OnInit {
 
   showNew = false;
 
+  preloader = true;
+
   constructor(private rewardService: RewardService) {
     this.readRewards();
   }
@@ -33,7 +35,8 @@ export class RewardListComponent implements OnInit {
   readRewards() {
     this.rewardService.getRewards().subscribe(
       (rewards: Reward[]) => this.rewardList = rewards,
-      error => console.error('Observer got an error: ' + error)
+      error => console.error('Observer got an error: ' + error),
+      () => this.preloader = false
     );
   }
 

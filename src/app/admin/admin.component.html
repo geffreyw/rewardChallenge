@@ -1,6 +1,6 @@
-<div class="container mt-2">
+<div class="container py-2">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" *ngIf="router.url == '/admin/opdrachten'">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title text-dark">Opdrachten</h3>
@@ -10,12 +10,22 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-12" *ngIf="router.url == '/admin/rewards'">
       <div class="card">
         <div class="card-body">
           <h3 class="card-title text-dark">Rewards</h3>
           <div class="card-text">
             <app-reward-list [aanpasbaar]="true" [filter]="true" [elementClass]="'col-12'" class="mt-2"></app-reward-list>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="router.url == '/admin/gebruikers'">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-dark">Users</h3>
+          <div class="card-text">
+            <app-user-list class="mt-2"></app-user-list>
           </div>
         </div>
       </div>

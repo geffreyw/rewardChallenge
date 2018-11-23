@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   NgbAlertModule,
-  NgbCollapseModule
+  NgbCollapseModule, NgbDropdownModule
 } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     NgbAlertModule.forRoot(),
-    NgbCollapseModule.forRoot()
+    NgbCollapseModule.forRoot(),
+    NgbDropdownModule.forRoot(),
   ],
   exports: [
     NgbAlertModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    NgbDropdownModule
   ],
   declarations: []
 })
