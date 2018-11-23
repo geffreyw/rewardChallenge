@@ -3,6 +3,8 @@ import {Opdracht} from '../interfaces/opdracht';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, filter, map, share} from 'rxjs/operators';
+import { User } from '../interfaces/user';
+import { UserOpdracht } from '../interfaces/userOpdracht';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ import {catchError, filter, map, share} from 'rxjs/operators';
 export class OpdrachtService {
 
   readonly TASKS_URL = 'https://hidden-citadel-73667.herokuapp.com/tasks';
+  readonly API_URL = 'https://hidden-citadel-73667.herokuapp.com';
   authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjQxYTdhZTcxNzlhNTZlMjEzNmQzOSIsImVtYWlsIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ0YXNrcyI6W10sInJld2FyZHMiOltdfSwiaWF0IjoxNTQyNzg5MzQ1LCJleHAiOjE1NDI4NzU3NDV9.vK8Qx5Adi5A8bKBgMLAGinjpHUduJMuHW9Foc0Dzjp8';
 
   readonly lengteShort = 30;
@@ -81,6 +84,17 @@ export class OpdrachtService {
     return this.http.put<Opdracht>(this.TASKS_URL + '/' + opdracht._id, opdracht , httpOptions).pipe(
       catchError(this.handleError)
     );
+  }
+
+  claimTask(taskID: String, userTask: UserOpdracht): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+    return this.http.post<User>(`${this.API_URL}/users/5bf41a7ae7179a56e2136d39/tasks/${taskID}`,userTask, httpOptions)
+      .pipe(catchError(this.handleError))
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -79,8 +79,23 @@
             </div>
           </div>
         </div>
+
+        <div *ngIf="showClaim">
+          <div class="row">
+            <div class="text-primary">
+                <input type="text"
+                    placeholder="Korte beschrijving"
+                   [(ngModel)]="userOpdracht.meta.description"/>
+            </div>
+            <div class="text-primary">
+                <input type="date"
+                   [(ngModel)]="userOpdracht.meta.date"/>
+            </div>
+          </div>
+        </div>
         <div class="row">
-          <button *ngIf="!aanpasbaar" type="button" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Voltooi</button>
+          <button *ngIf="!aanpasbaar  || !showClaim" (click)="showClaim = !showClaim" type="button" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Voltooi</button>
+          <button *ngIf="showClaim" (click)="claimOpdracht()" type="button" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Claim</button>
         </div>
       </div>
       <div *ngIf="aanpasbaar" class="row">
