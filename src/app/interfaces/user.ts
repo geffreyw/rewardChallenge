@@ -8,4 +8,5 @@ export class User {
   points: number;
   tasks: UserOpdracht[];
   rewards: UserReward[];
+  password: string;
 }

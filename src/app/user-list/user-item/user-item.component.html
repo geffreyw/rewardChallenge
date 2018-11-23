@@ -1,7 +1,7 @@
 <div class="card my-2 shadow">
   <div class="card-body">
     <div class="card-text">
-      <form #userEditForm="ngForm" (submit)="updateUser()" *ngIf="editing">
+      <form #userEditForm="ngForm" (submit)="updateUser(userEditForm.value)" *ngIf="editing">
         <div class="form-group">
           <label for="email">Email:</label>
           <input type="text" id="email" class="form-control"
@@ -16,6 +16,13 @@
             <small *ngIf="email.errors['required']">Vul een e-mailadres in!</small>
             <small *ngIf="email.errors['email']">E-mailadres is niet geldig!</small>
           </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Nieuw wachtwoord:</label>
+          <input type="password" id="password" class="form-control"
+                 name="password"
+                 #password="ngModel"
+                 [(ngModel)]="editUser.password"/>
         </div>
         <div class="form-group">
           <label for="role">Role:</label>
@@ -56,7 +63,7 @@
           <button class="btn btn-link btn-edit text-dark"
                   *ngIf="!editing"
                   (click)="editing=true"><i class="fas fa-pencil-alt"></i></button>
-          <button class="btn btn-link btn-del text-dark"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-link btn-del text-dark" (click)="delete.emit()"><i class="fas fa-trash"></i></button>
         </div>
       </div>
     </div>

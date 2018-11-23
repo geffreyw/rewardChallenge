@@ -12,6 +12,8 @@ export class UserListComponent implements OnInit {
 
   usersList: User[];
 
+  filterValue: string;
+
   preloader = true;
 
   showNew = false;
@@ -31,11 +33,27 @@ export class UserListComponent implements OnInit {
     );
   }
 
+  filterOpdrachten() {
+    if (this.filterValue) {
+      this.userService.zoekUser(this.filterValue).subscribe(
+        (users: User[]) => this.usersList = users,
+        error => console.error('Observer got an error: ' + error)
+      );
+    } else {
+      this.readUsers();
+    }
+  }
+
   addUser(data) {
     this.userService.addUser(data.email, data.password).subscribe(() =>
       this.readUsers()
     );
     this.clearNewUser();
+  }
+
+  deleteUser(user: User) {
+    this.userService.deleteUser(user._id).subscribe( () =>
+      this.usersList = this.usersList.filter(u => u !== user));
   }
 
   clearNewUser() {

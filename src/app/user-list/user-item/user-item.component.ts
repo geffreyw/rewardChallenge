@@ -13,6 +13,7 @@ export class UserItemComponent implements OnInit {
   @Input() index: number;
 
   @Output() update = new EventEmitter();
+  @Output() delete = new EventEmitter();
 
   editing = false;
 

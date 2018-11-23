@@ -1,5 +1,16 @@
 <div class="row">
   <div class="col-12">
+    <form #userfilterForm="ngForm">
+      <div class="form-group">
+        <label for="opdrachtfilter">Zoeken:</label>
+        <input type="text" id="opdrachtfilter" class="form-control"
+               name="opdrachtfilter"
+               #opdrachtfilter="ngModel"
+               [(ngModel)]="filterValue" (keyup)="filterOpdrachten()"/>
+      </div>
+    </form>
+  </div>
+  <div class="col-12">
     <button class="btn btn-dark" *ngIf="!showNew" (click)="showNew=true">+ Nieuw</button>
     <div class="card shadow" *ngIf="showNew">
       <div class="card-body">
@@ -26,7 +37,6 @@
                    [class.is-valid]="password.touched && password.valid"
                    [class.is-invalid]="password.touched && password.invalid"
                    required
-                   password
                    name="password"
                    #password="ngModel"
                    (ngModel)="password"/>
@@ -63,7 +73,8 @@
         *ngFor="let user of usersList; let i = index"
         [item]="user"
         [index]="i"
-        (update)="readUsers()">
+        (update)="readUsers()"
+        (delete)="deleteUser(user)">
       </app-user-item>
     </div>
   </div>

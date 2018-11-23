@@ -11,7 +11,7 @@ import {e} from '@angular/core/src/render3';
 export class UserService {
 
   readonly USER_URL = 'https://hidden-citadel-73667.herokuapp.com/users';
-  authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjQxYTdhZTcxNzlhNTZlMjEzNmQzOSIsImVtYWlsIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ0YXNrcyI6W3sibWV0YSI6eyJkYXRlIjoiMTk3MC0wMS0yMVQwNDowNjo1MS4xOTFaIiwiZGVzY3JpcHRpb24iOiJNZWV0aW5nIHJldmlld2VkIn0sImFwcHJvdmVkIjpmYWxzZSwicGVuZGluZyI6dHJ1ZSwibmFtZSI6Ik1lZXRpbmciLCJwb2ludHMiOjUsIl9pZCI6IjViZjVhZDJjMzY2MGVmMzY0YTViMTBhOCJ9LHsibWV0YSI6eyJkYXRlIjoiMjAxOC0xMS0wOVQwMzowNjo1MS4xOTFaIiwiZGVzY3JpcHRpb24iOiJNZWV0aW5nIHJldmlld2VkIn0sImFwcHJvdmVkIjpmYWxzZSwicGVuZGluZyI6dHJ1ZSwibmFtZSI6Ik1lZXRpbmciLCJwb2ludHMiOjUsIl9pZCI6IjViZjVhZDVlMzY2MGVmMzY0YTViMTBhOSJ9XSwicmV3YXJkcyI6W3siYXBwcm92ZWQiOmZhbHNlLCJwZW5kaW5nIjp0cnVlLCJuYW1lIjoiQmFrIGJpZXIhIiwicG9pbnRzIjoyMCwiX2lkIjoiNWJmNTUzYjQyZjViYjgwMDE2OTgyY2FjIn1dfSwiaWF0IjoxNTQyOTY2NzU4LCJleHAiOjE1NDMwNTMxNTh9.6jGRXwsaQsUKMSB7goxxXZC0ZeAVluABOI7jcmfISGQ';
+  authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjgwOTE1ZTNmMGJiMDAxNjkzNzAzZSIsImVtYWlsIjoiZ2VmZnJleXcyQGhvdG1haWwuY29tIiwicm9sZSI6ImFkbWluIiwidGFza3MiOltdLCJyZXdhcmRzIjpbXX0sImlhdCI6MTU0Mjk4MjIwNywiZXhwIjoxNTQzMDY4NjA3fQ.70ZXPfc7omcEYmx0qF2FJQSQPAd1eWzFXDz2jxzwbvU';
 
   constructor(private http: HttpClient) {
   }
@@ -40,19 +40,30 @@ export class UserService {
     );
   }
 
-  /*zoekReward(term: string): Observable<Reward[]> {
+  zoekUser(term: string): Observable<User[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authToken
+      })
+    };
     term = term.trim().toLowerCase();
-    return this.http.get<Reward[]>(this.REWARD_URL).pipe(
-      map( rewards => {
-        for (const reward of rewards) {
-          reward.short = `${reward.description.substring(0, 15).trim()}...`;
+    return this.http.get<User[]>(this.USER_URL, httpOptions).pipe(
+      map( users => {
+        for (const user of users) {
+          let totPoints = 0;
+          for (const task of user.tasks) {
+            if (task.approved) {
+              totPoints += task.points;
+            }
+          }
+          user.points = totPoints;
         }
-        return rewards.filter(o => o.name.toLowerCase().indexOf(term) >= 0);
+        return users.filter(u => u.email.toLowerCase().indexOf(term) >= 0);
       }),
       share(),
       catchError(this.handleError)
     );
-  }*/
+  }
 
   addUser(email, password): Observable<User> {
     const httpOptions = {
@@ -65,18 +76,18 @@ export class UserService {
       catchError(this.handleError)
     );
   }
-/*
-  deleteReward(id: String): Observable<{}> {
+
+  deleteUser(id: String): Observable<{}> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.authToken
       })
     };
-    return this.http.delete(this.REWARD_URL + '/' + id, httpOptions).pipe(
+    return this.http.delete(this.USER_URL + '/' + id, httpOptions).pipe(
       catchError(this.handleError)
     );
-  }*/
+  }
 
   updateUser(user: User): Observable<User> {
     console.log(user);
