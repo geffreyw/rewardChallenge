@@ -65,4 +65,6 @@ export class RewardListComponent implements OnInit {
     this.newReward = new Reward();
   }
 
+ 
+
 }

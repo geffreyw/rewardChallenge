@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Reward} from '../interfaces/reward';
+import {User} from '../interfaces/user';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Opdracht} from '../interfaces/opdracht';
@@ -11,6 +12,8 @@ import {catchError, map, share} from 'rxjs/operators';
 export class RewardService {
 
   readonly REWARD_URL = 'https://hidden-citadel-73667.herokuapp.com/rewards';
+  readonly API_URL = 'https://hidden-citadel-73667.herokuapp.com';
+  
   authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjQxYTdhZTcxNzlhNTZlMjEzNmQzOSIsImVtYWlsIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ0YXNrcyI6W10sInJld2FyZHMiOltdfSwiaWF0IjoxNTQyNzg5MzQ1LCJleHAiOjE1NDI4NzU3NDV9.vK8Qx5Adi5A8bKBgMLAGinjpHUduJMuHW9Foc0Dzjp8';
 
   readonly lengteShort = 30;
@@ -82,6 +85,18 @@ export class RewardService {
     return this.http.put<Reward>(this.REWARD_URL + '/' + reward._id, reward , httpOptions).pipe(
       catchError(this.handleError)
     );
+  }
+
+  claimReward(reward: Reward): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'applicationi/json',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+
+    return this.http.post<User>(`${this.API_URL}/users/5bf41a7ae7179a56e2136d39/rewards/${reward._id}`,null,httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
