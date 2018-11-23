@@ -1,7 +1,11 @@
+import {UserOpdracht} from './userOpdracht';
+import {UserReward} from './userReward';
+
 export class User {
-  uid: string;
-  displayName: string;
-  photoURL: string;
+  _id: string;
   email: string;
-  token: string;
+  role = 'user';
+  points: number;
+  tasks: UserOpdracht[];
+  rewards: UserReward[];
 }

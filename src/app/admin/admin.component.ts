@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Opdracht} from '../interfaces/opdracht';
 import {OpdrachtService} from '../services/opdracht.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +10,7 @@ import {OpdrachtService} from '../services/opdracht.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
   }

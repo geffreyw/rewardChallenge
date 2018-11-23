@@ -1,0 +1,64 @@
+<div class="card my-2 shadow">
+  <div class="card-body">
+    <div class="card-text">
+      <form #userEditForm="ngForm" (submit)="updateUser()" *ngIf="editing">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" id="email" class="form-control"
+                 [class.is-valid]="email.touched && email.valid"
+                 [class.is-invalid]="email.touched && email.invalid"
+                 required
+                 email
+                 name="email"
+                 #email="ngModel"
+                 [(ngModel)]="editUser.email"/>
+          <div *ngIf="email.errors  && (email.touched || email.dirty)" class="text-danger">
+            <small *ngIf="email.errors['required']">Vul een e-mailadres in!</small>
+            <small *ngIf="email.errors['email']">E-mailadres is niet geldig!</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="role">Role:</label>
+          <select class="form-control"
+                  id="role"
+                  name="role"
+                  #role="ngModel"
+                  [(ngModel)]="editUser.role">
+            <option class="form-control" value="user">User</option>
+            <option class="form-control" value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="col-auto ">
+            <button type="submit" class="btn btn-dark"
+                    [disabled]="userEditForm.invalid">Opslaan
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="row" *ngIf="!editing">
+        <div class="col-9">
+          <b class="text-primary">{{ item.email }}</b>
+          <p class="text-secondary">{{ item.role }}</p>
+        </div>
+        <div class="col-auto ml-auto">
+          <div class="punt">
+            <p>{{ item.points }} <i class="fas fa-coins"></i></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ml-auto">
+          <button type="button"
+                  class="btn btn-link btn-cancel"
+                  *ngIf="editing"
+                  (click)="clearEdit()"><i class="fas fa-times text-dark"></i></button>
+          <button class="btn btn-link btn-edit text-dark"
+                  *ngIf="!editing"
+                  (click)="editing=true"><i class="fas fa-pencil-alt"></i></button>
+          <button class="btn btn-link btn-del text-dark"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
