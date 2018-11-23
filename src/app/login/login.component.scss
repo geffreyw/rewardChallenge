@@ -1,11 +1,20 @@
-.container{
-  max-width: 480px;
-  margin: auto;
-  margin-top: 20px;
-  border: solid 2px black;
-  border-radius: 10px;
+#loginpage{
+  height: calc(100vh - 3.85rem);
+  background: url("../../assets/img/pexels-photo-684385.jpeg") no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-.center{
-  text-align: center;
+#logincard{
+  width: 75vw;
+  max-width: 310px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: calc((50vh - 7.175rem));
+  left: 50%;
+  box-shadow: 2px 2px 30px;
+}
+
+.alert{
+  z-index: 1020;
 }

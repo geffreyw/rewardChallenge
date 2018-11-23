@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AlertBox} from '../interfaces/alert-box';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginData = {
+    email: '',
+    password: ''
+  };
+
+  alertBox: AlertBox = {
+    message: '',
+    color: ''
+  };
+
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
   }

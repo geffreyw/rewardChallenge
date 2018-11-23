@@ -27,6 +27,10 @@ $theme-colors: (
 body{
   background-color: $light;
   color: $dark;
+  min-height: 100vh;
+}
+
+#mainContent{
 
 }
 /*  header */
