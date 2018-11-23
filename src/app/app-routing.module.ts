@@ -9,7 +9,9 @@ import {RewardsComponent} from './user/rewards/rewards.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'admin', component: AdminComponent},
+  {path: 'admin/rewards', component: AdminComponent},
+  {path: 'admin/opdrachten', component: AdminComponent},
+  {path: 'admin/gebruikers', component: AdminComponent},
   {path: 'user', component: UserComponent},
   {path: 'opdrachten', component: OpdrachtenComponent},
   {path: 'rewards', component: RewardsComponent},

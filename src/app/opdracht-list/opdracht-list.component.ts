@@ -24,6 +24,8 @@ export class OpdrachtListComponent implements OnInit {
 
   showNew = false;
 
+  preloader = true;
+
   constructor(private opdrachtService: OpdrachtService) {
     this.readOpdrachten();
   }
@@ -34,7 +36,8 @@ export class OpdrachtListComponent implements OnInit {
   readOpdrachten() {
     this.opdrachtService.getOpdrachten().subscribe(
       (opdrachten: Opdracht[]) => this.opdrachtenList = opdrachten,
-      error => console.error('Observer got an error: ' + error)
+      error => console.error('Observer got an error: ' + error),
+      () => this.preloader = false
     );
   }
 
