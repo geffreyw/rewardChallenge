@@ -22,7 +22,6 @@
                     <label for="email" class="text-muted">E-mail:</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Enter email"
                            required
-                           pattern="\S+@\S+\.\S+"
                            #email="ngModel"
                            [(ngModel)]="loginData.email">
                   </div>
@@ -31,14 +30,8 @@
                     <input type="password" class="form-control" name="password" id="password"
                            placeholder="Password (6+ characters)"
                            required
-                           minlength="6"
                            #password="ngModel"
                            [(ngModel)]="loginData.password">
-                    <a class="text-primary"
-                       *ngIf="email.value"
-                       (click)="authService.emailResetPassword(email.value)">
-                      Wachtwoord vergeten?
-                    </a>
                   </div>
                   <button type="button" class="btn btn-outline-secondary mr-2"
                           (click)="emailLogin(f.value, f.valid)">
