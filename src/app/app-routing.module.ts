@@ -6,12 +6,14 @@ import {AdminComponent} from './admin/admin.component';
 import {UserComponent} from './user/user.component';
 import {OpdrachtenComponent} from './user/opdrachten/opdrachten.component';
 import {RewardsComponent} from './user/rewards/rewards.component';
+import {TasksComponent} from './admin/tasks/tasks.component'
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'admin/rewards', component: AdminComponent},
   {path: 'admin/opdrachten', component: AdminComponent},
   {path: 'admin/gebruikers', component: AdminComponent},
+  {path: 'admin/tasks', component: TasksComponent},
   {path: 'user', component: UserComponent},
   {path: 'opdrachten', component: OpdrachtenComponent},
   {path: 'rewards', component: RewardsComponent},

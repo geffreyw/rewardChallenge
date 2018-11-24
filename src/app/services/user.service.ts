@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError, map, share} from 'rxjs/operators';
 import {User} from '../interfaces/user';
 import {e} from '@angular/core/src/render3';
+import { UserOpdracht } from '../interfaces/userOpdracht';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import {e} from '@angular/core/src/render3';
 export class UserService {
 
   readonly USER_URL = 'https://hidden-citadel-73667.herokuapp.com/users';
+  readonly API_URL = 'https://hidden-citadel-73667.herokuapp.com';
+  
   authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjgwOTE1ZTNmMGJiMDAxNjkzNzAzZSIsImVtYWlsIjoiZ2VmZnJleXcyQGhvdG1haWwuY29tIiwicm9sZSI6ImFkbWluIiwidGFza3MiOltdLCJyZXdhcmRzIjpbXX0sImlhdCI6MTU0Mjk4MjIwNywiZXhwIjoxNTQzMDY4NjA3fQ.70ZXPfc7omcEYmx0qF2FJQSQPAd1eWzFXDz2jxzwbvU';
 
   constructor(private http: HttpClient) {
@@ -19,7 +22,7 @@ export class UserService {
   getUsers(): Observable<User[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.authToken
+        'Authorization': localStorage.getItem('token')
       })
     };
     return this.http.get<User[]>(this.USER_URL, httpOptions).pipe(
@@ -103,6 +106,22 @@ export class UserService {
     );
   }
 
+  toggleApprovementTask(task: UserOpdracht): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+  
+    let body = {
+      approved: !task.approved
+    }
+
+    return this.http.put<User>(`${this.API_URL}/users/${task.user.id}/tasks/${task._id}/status`,body,httpOptions)
+      .pipe(catchError(this.handleError))
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -114,8 +133,10 @@ export class UserService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
+    console.log(error)
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
+
   }
 }
