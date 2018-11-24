@@ -1,5 +1,29 @@
-<div class="bg-gradient-blue" id="header">
-  <app-header ></app-header>
+<div class="bg-gradient-blue" id="header" style="min-height: 150px">
+  <div class="container px-3 pt-2">
+    <div class="row">
+      <div class="col-12 col-sm-6">
+        <div class="row" >
+          <div class="col align-bottom" style="display: flex; align-items: center;" >
+            <div>
+              <h2 class="m-0 p-0">{{ user.email }}</h2>
+              <span class="text-muted">{{ user.role }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-8 col-sm-6">
+        <div class="row">
+          <div class=" col-6 col-sm-12">
+            <i class="fas fa-coins"></i> {{ user.points }} beschikbare punten<br>
+          </div>
+          <div class="col-6 col-sm-12">
+            <span class="text-muted ">waarvan 70 punten deze week verdient</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--<app-opdracht-list [editable]="true"></app-opdracht-list>-->

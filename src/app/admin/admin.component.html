@@ -1,4 +1,4 @@
-<div class="container py-2">
+<div class="container py-2" *ngIf="user?.role=='admin'">
   <div class="row">
     <div class="col-12" *ngIf="router.url == '/admin/opdrachten'">
       <div class="card">

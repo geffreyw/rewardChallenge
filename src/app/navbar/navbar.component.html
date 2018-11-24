@@ -18,9 +18,9 @@
         <a class="nav-link" routerLink="/rewards" routerLinkActive="active">Rewards</a>
       </li>
     </ul>
-    <ul class="navbar-nav">
-      <li class=" dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="id01" ngbDropdownToggle>Beheren</a>
+    <ul class="navbar-nav" *ngIf="user?.role=='admin'">
+      <li class="dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="beheren" ngbDropdownToggle>Beheren</a>
         <div class="dropdown-menu dropdown" aria-labelledby="id01"
              ngbDropdownMenu
              (click)="isCollapsed = !isCollapsed">
@@ -30,9 +30,20 @@
         </div>
       </li>
     </ul>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" *ngIf="user">
+      <!--<span class="navbar-text d-md-block d-sm-none">
+            {{ user.email }}
+      </span>
       <li class="nav-item" (click)="isCollapsed = !isCollapsed">
         <a class="nav-link" (click)="logout()">Logout</a>
+      </li>-->
+      <li class="dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="userinfo" ngbDropdownToggle>{{ user.email }} <i class="fas fa-coins"></i> {{ user.points }}</a>
+        <div class="dropdown-menu dropdown" aria-labelledby="id01"
+             ngbDropdownMenu
+             (click)="isCollapsed = !isCollapsed">
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
       </li>
     </ul>
   </div>

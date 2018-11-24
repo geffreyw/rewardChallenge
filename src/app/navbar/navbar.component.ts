@@ -13,14 +13,13 @@ export class NavbarComponent implements OnInit {
   isCollapsed = true;
   user: User;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.authService.userData$.subscribe( data => this.user = data);
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['login']);
+    this.authService.logout();
   }
 }

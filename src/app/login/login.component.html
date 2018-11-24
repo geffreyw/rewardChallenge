@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 mt-3">
-        <!--<div class="alert alert-dismissible fade show"
+        <div class="alert alert-dismissible fade show"
              [ngClass]="alertBox.color"
              *ngIf="alertBox">
           <p [innerHTML]="alertBox.message"></p>
@@ -10,7 +10,7 @@
                   (click)="authService.clearMessage();">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>-->
+        </div>
         <div id="logincard" class="card">
           <div class="card-body">
             <h2 class="card-title text-primary">Login</h2>
@@ -33,10 +33,17 @@
                            #password="ngModel"
                            [(ngModel)]="loginData.password">
                   </div>
-                  <button type="button" class="btn btn-outline-secondary mr-2"
-                          (click)="emailLogin(f.value, f.valid)">
-                    Login
-                  </button>
+                  <div class="form-group">
+                    <button type="button" class="btn btn-outline-secondary mr-2"
+                            (click)="emailLogin(f.value, f.valid)"
+                            *ngIf="!preloader">
+                      Login
+                    </button>
+                    <div class="progress mb-3" *ngIf="preloader">
+                      <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated" style="width:100%"></div>
+                    </div>
+                  </div>
+
                 </form>
               </div>
             </div>

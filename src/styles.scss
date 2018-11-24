@@ -84,6 +84,9 @@ a:hover, a:focus{
   margin: 0.5rem 1rem;
   border: none;
 }
+.nav-link:hover{
+  cursor: pointer;
+}
 
 .progress-bar{
   width: 0;

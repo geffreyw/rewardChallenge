@@ -43,6 +43,28 @@ export class UserService {
     );
   }
 
+  getUser(id: string): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token')
+      })
+    };
+    return this.http.get<User>(this.USER_URL + '/' + id, httpOptions).pipe(
+      map((user: User) => {
+        let totPoints = 0;
+        for (const task of user.tasks) {
+          if (task.approved) {
+            totPoints += task.points;
+          }
+        }
+        user.points = totPoints;
+        return user;
+      }),
+      share(),
+      catchError(this.handleError)
+    );
+  }
+
   zoekUser(term: string): Observable<User[]> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -51,7 +73,7 @@ export class UserService {
     };
     term = term.trim().toLowerCase();
     return this.http.get<User[]>(this.USER_URL, httpOptions).pipe(
-      map( users => {
+      map(users => {
         for (const user of users) {
           let totPoints = 0;
           for (const task of user.tasks) {
@@ -101,7 +123,7 @@ export class UserService {
         'Authorization': this.authToken
       })
     };
-    return this.http.put<User>(this.USER_URL + '/' + user._id, user , httpOptions).pipe(
+    return this.http.put<User>(this.USER_URL + '/' + user._id, user, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
