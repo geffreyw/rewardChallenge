@@ -5,6 +5,7 @@ import {catchError, map, share} from 'rxjs/operators';
 import {User} from '../interfaces/user';
 import {e} from '@angular/core/src/render3';
 import { UserOpdracht } from '../interfaces/userOpdracht';
+import { UserReward } from '../interfaces/userReward';
 
 @Injectable({
   providedIn: 'root'
@@ -141,6 +142,22 @@ export class UserService {
     }
 
     return this.http.put<User>(`${this.API_URL}/users/${task.user.id}/tasks/${task._id}/status`,body,httpOptions)
+      .pipe(catchError(this.handleError))
+  }
+
+  toggleApprovementReward(reward: UserReward): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+  
+    let body = {
+      approved: !reward.approved
+    }
+
+    return this.http.put<User>(`${this.API_URL}/users/${reward.user.id}/rewards/${reward._id}/status`,body,httpOptions)
       .pipe(catchError(this.handleError))
   }
 
