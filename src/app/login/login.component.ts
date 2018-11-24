@@ -19,32 +19,26 @@ export class LoginComponent implements OnInit {
     color: ''
   };
 
+  preloader = false;
+
   constructor(public authService: AuthService, private http: HttpClient) {
 
   }
 
   ngOnInit() {
-    if (localStorage.getItem('loginData')) {
-      this.loginData = JSON.parse(localStorage.getItem('loginData'));
-    }
     this.authService.alertBox$.subscribe(data => {
       this.alertBox = data;
     });
   }
 
- async emailLogin(data: any, isValid: string) {
-   this.authService.clearMessage();
-   if (isValid) {
-     try {
-       const user$ = this.authService.getToken(data.email, data.password);
-       const res = (await user$.toPromise());
-       localStorage.setItem('token', res.token);
-     } catch (err) {
-       console.log(err);
-     }
-   } else {
-     this.authService.setMessage('Email/password not valid...', 'alert-danger');
-   }
- }
-
+  emailLogin(data: any, isValid: string) {
+    this.authService.clearMessage();
+    this.preloader = true;
+    if (isValid) {
+      this.authService.emailLogin(data.email, data.password);
+      // localStorage.setItem('loginData', JSON.stringify(data));
+    } else {
+      this.authService.setMessage('Email/password not valid...', 'alert-danger');
+    }
+  }
 }

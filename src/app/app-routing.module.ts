@@ -6,15 +6,16 @@ import {AdminComponent} from './admin/admin.component';
 import {UserComponent} from './user/user.component';
 import {OpdrachtenComponent} from './user/opdrachten/opdrachten.component';
 import {RewardsComponent} from './user/rewards/rewards.component';
+import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'admin/rewards', component: AdminComponent},
-  {path: 'admin/opdrachten', component: AdminComponent},
-  {path: 'admin/gebruikers', component: AdminComponent},
-  {path: 'user', component: UserComponent},
-  {path: 'opdrachten', component: OpdrachtenComponent},
-  {path: 'rewards', component: RewardsComponent},
+  {path: 'admin/rewards', component: AdminComponent, canActivate: [AuthGuard]},
+  {path: 'admin/opdrachten', component: AdminComponent, canActivate: [AuthGuard]},
+  {path: 'admin/gebruikers', component: AdminComponent, canActivate: [AuthGuard]},
+  {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
+  {path: 'opdrachten', component: OpdrachtenComponent, canActivate: [AuthGuard]},
+  {path: 'rewards', component: RewardsComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   // Niet gedefinieerde routes ook doorverwijzen. Zoniet krijg je fouten in de console!
   {path: '**',  component: ErrorComponent},
