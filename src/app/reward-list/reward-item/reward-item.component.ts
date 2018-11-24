@@ -45,4 +45,16 @@ export class RewardItemComponent implements OnInit {
     this.clearEdit();
   }
 
+  async claimReward() {
+    // console.log("merci");
+    try{
+      let res = await this.rewardService.claimReward(this.item).toPromise()
+      console.log(res);
+    }catch(err){
+      console.log(err)
+
+    }
+    
+  }
+
 }

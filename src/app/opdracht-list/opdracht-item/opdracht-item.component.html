@@ -79,8 +79,34 @@
             </div>
           </div>
         </div>
+<!-- CLAIM-->
+
+
+        <form (submit)="claimOpdracht()" *ngIf="showClaim">
+            <div class="form-row">
+              <div class="form-group col-12">
+                <label for="meta.description">Korte omschrijving:</label>
+                  <input type="text"
+                    placeholder="Korte beschrijving"
+                   [(ngModel)]="userOpdracht.meta.description"/>
+              </div>
+              <div class="form-group col-12">
+                <label for="meta.data">Wanneer heb je deze taak afgerond?</label>
+                   <input type="date"
+                   [(ngModel)]="userOpdracht.meta.date"/>
+              </div>
+            </div>
+                    <div class="form-row">
+            <div class="col-auto ">
+              <button type="submit" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Claim</button>
+            </div>
+          </div>
+          </form>
+<!-- CLAIM-->
+
         <div class="row">
-          <button *ngIf="!aanpasbaar" type="button" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Voltooi</button>
+          <button *ngIf="!aanpasbaar  && !showClaim" (click)="showClaim = !showClaim" type="button" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Voltooi</button>
+
         </div>
       </div>
       <div *ngIf="aanpasbaar" class="row">

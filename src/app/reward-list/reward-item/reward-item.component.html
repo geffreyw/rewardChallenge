@@ -86,7 +86,7 @@
         </div>
         <div class="row">
           <div class="mx-auto" *ngIf="(userPunten / item.points) >=1">
-            <button type="button" class=" btn btn-outline-secondary"><i class="fas fa-award"></i> Ophalen</button>
+            <button type="button" class=" btn btn-outline-secondary" (click)="claimReward()" ><i class="fas fa-award"></i> Ophalen</button>
           </div>
         </div>
       </div>
