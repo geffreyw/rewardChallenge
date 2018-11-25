@@ -2,8 +2,8 @@
   <div class="container px-3 pt-2">
     <div class="row">
       <div class="col-12 col-sm-6">
-        <div class="row" >
-          <div class="col align-bottom" style="display: flex; align-items: center;" >
+        <div class="row">
+          <div class="col align-bottom" style="display: flex; align-items: center;">
             <div>
               <h2 class="m-0 p-0">{{ user.email }}</h2>
               <span class="text-muted">{{ user.role }}</span>
@@ -26,17 +26,102 @@
   </div>
 </div>
 
-<div class="container" *ngIf="user">
-  <div class="col-12" *ngIf="user.tasks.length <= 0">
-    <p>U heeft nog opdrachten vervuld.</p>
+<div class="container mt-2" *ngIf="user">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-12 my-3">
+          <h3 class="text-primary">Mijn rewards</h3>
+        </div>
+        <div class="col-12" *ngIf="!user.rewards.length">
+          <div class="card shadow my-2">
+            <div class="card-body">
+              <p><b class="text-dark card-title">U heeft nog geen rewards.</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="user.rewards.length">
+          <div class="card shadow my-2">
+            <div class="card-body">
+              <h4 class="card-title text-secondary">Goedgekeurd</h4>
+              <p *ngIf="!approvedRewards.length"><b class="text-dark">U heeft geen goedgekeurde rewards.</b></p>
+              <div class="row" *ngIf="approvedRewards.length">
+                <app-user-reward-item
+                  class="col-6"
+                  *ngFor="let item of approvedRewards"
+                  [opdracht]="item">
+                </app-user-reward-item>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow my-2">
+            <div class="card-body">
+              <h4 class="card-title text-info">Pending</h4>
+              <p *ngIf="!pendingRewards.length"><b class="text-dark">U heeft geen pending rewards.</b></p>
+              <div class="row" *ngIf="pendingRewards.length">
+                <app-user-reward-item
+                  class="col-6"
+                  *ngFor="let item of pendingRewards"
+                  [opdracht]="item"
+                  (delete)="deleteReward(item._id)">
+                </app-user-reward-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-12 my-3">
+          <h3 class="text-primary">Mijn opdrachten</h3>
+        </div>
+        <div class="col-12" *ngIf="!user.tasks.length">
+          <div class="card shadow my-2">
+            <div class="card-body">
+              <p><b class="text-dark card-title">U heeft nog geen opdrachten vervuld.</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="user.tasks.length">
+          <div class="card shadow my-2">
+            <div class="card-body">
+              <h4 class="card-title text-secondary">Goedgekeurd</h4>
+              <p *ngIf="!approvedTasks.length"><b class="text-dark">U heeft geen goedgekeurde opdrachten.</b></p>
+              <div class="row" *ngIf="approvedTasks.length">
+                <app-user-opdracht-item
+                  class="col-6"
+                  *ngFor="let item of approvedTasks"
+                  [opdracht]="item">
+                </app-user-opdracht-item>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow my-2">
+            <div class="card-body">
+              <h4 class="card-title text-info">Pending</h4>
+              <p *ngIf="!pendingTasks.length"><b class="text-dark">U heeft geen pending opdrachten.</b></p>
+              <div class="row" *ngIf="pendingTasks.length">
+                <app-user-opdracht-item
+                  class="col-6"
+                  *ngFor="let item of pendingTasks"
+                  [opdracht]="item"
+                  (delete)="deleteOpdracht(item._id)">
+                </app-user-opdracht-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="container">
+<!--<div class="container">
   <div class="col-12">
     <pre>{{ user | json }}</pre>
   </div>
-</div>
+</div>-->
 
 <!--<app-opdracht-list [editable]="true"></app-opdracht-list>-->
 <!--<div class="container">

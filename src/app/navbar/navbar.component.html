@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm sticky-top">
-  <a class="navbar-brand" routerLink="/user"><img src="../../assets/logo-stack.png" class="" height="35"/></a>
+  <a class="navbar-brand" routerLink="/user" (click)="isCollapsed = true"><img src="../../assets/logo-stack.png" class="" height="35"/></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
           (click)="isCollapsed = !isCollapsed"
           *ngIf="user">

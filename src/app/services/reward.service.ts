@@ -12,12 +12,13 @@ export class RewardService {
 
   readonly REWARD_URL = 'https://hidden-citadel-73667.herokuapp.com/rewards';
   readonly API_URL = 'https://hidden-citadel-73667.herokuapp.com';
-  
-  authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjQxYTdhZTcxNzlhNTZlMjEzNmQzOSIsImVtYWlsIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ0YXNrcyI6W10sInJld2FyZHMiOltdfSwiaWF0IjoxNTQyNzg5MzQ1LCJleHAiOjE1NDI4NzU3NDV9.vK8Qx5Adi5A8bKBgMLAGinjpHUduJMuHW9Foc0Dzjp8';
-
+  readonly authToken: string;
+  readonly uid: string;
   readonly lengteShort = 30;
 
   constructor(private http: HttpClient) {
+    this.authToken = localStorage.getItem('token');
+    this.uid = localStorage.getItem('uid');
   }
 
   getRewards(): Observable<Reward[]> {
@@ -90,11 +91,11 @@ export class RewardService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'applicationi/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': this.authToken
       })
     }
 
-    return this.http.post<User>(`${this.API_URL}/users/5bf41a7ae7179a56e2136d39/rewards/${reward._id}`,null,httpOptions)
+    return this.http.post<User>(`${this.API_URL}/users/${this.uid}/rewards/${reward._id}`,null,httpOptions)
       .pipe(catchError(this.handleError));
   }
 

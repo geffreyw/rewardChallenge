@@ -13,11 +13,13 @@ export class OpdrachtService {
 
   readonly TASKS_URL = 'https://hidden-citadel-73667.herokuapp.com/tasks';
   readonly API_URL = 'https://hidden-citadel-73667.herokuapp.com';
-  authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjQxYTdhZTcxNzlhNTZlMjEzNmQzOSIsImVtYWlsIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJ0YXNrcyI6W10sInJld2FyZHMiOltdfSwiaWF0IjoxNTQyNzg5MzQ1LCJleHAiOjE1NDI4NzU3NDV9.vK8Qx5Adi5A8bKBgMLAGinjpHUduJMuHW9Foc0Dzjp8';
-
+  readonly authToken: string;
+  readonly uid: string;
   readonly lengteShort = 30;
 
   constructor(private http: HttpClient) {
+    this.authToken = localStorage.getItem('token');
+    this.uid = localStorage.getItem('uid');
   }
 
   getOpdrachten(): Observable<Opdracht[]> {
@@ -90,11 +92,11 @@ export class OpdrachtService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': this.authToken
       })
-    }
-    return this.http.post<User>(`${this.API_URL}/users/5bf41a7ae7179a56e2136d39/tasks/${taskID}`,userTask, httpOptions)
-      .pipe(catchError(this.handleError))
+    };
+    return this.http.post<User>(`${this.API_URL}/users/${this.uid}/tasks/${taskID}`, userTask, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

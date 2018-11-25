@@ -1,1 +1,5 @@
-<app-aprove-rewards *ngFor="let reward of userRewardsList; let i = index"></app-aprove-rewards>
+<app-aprove-reward-item
+  *ngFor="let reward of userRewardsList; let i = index"
+  [item]="reward">
+
+</app-aprove-reward-item>

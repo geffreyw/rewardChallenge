@@ -15,15 +15,17 @@ export class UserService {
   readonly USER_URL = 'https://hidden-citadel-73667.herokuapp.com/users';
   readonly API_URL = 'https://hidden-citadel-73667.herokuapp.com';
 
-  authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjgwOTE1ZTNmMGJiMDAxNjkzNzAzZSIsImVtYWlsIjoiZ2VmZnJleXcyQGhvdG1haWwuY29tIiwicm9sZSI6ImFkbWluIiwidGFza3MiOltdLCJyZXdhcmRzIjpbXX0sImlhdCI6MTU0Mjk4MjIwNywiZXhwIjoxNTQzMDY4NjA3fQ.70ZXPfc7omcEYmx0qF2FJQSQPAd1eWzFXDz2jxzwbvU';
-
+  readonly authToken: string;
+  readonly uid: string;
   constructor(private http: HttpClient) {
+    this.authToken = localStorage.getItem('token');
+    this.uid = localStorage.getItem('uid');
   }
 
   getUsers(): Observable<User[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': localStorage.getItem('token')
+        'Authorization': this.authToken
       })
     };
     return this.http.get<User[]>(this.USER_URL, httpOptions).pipe(
@@ -47,7 +49,7 @@ export class UserService {
   getUser(id: string): Observable<User> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': localStorage.getItem('token')
+        'Authorization': this.authToken
       })
     };
     return this.http.get<User>(this.USER_URL + '/' + id, httpOptions).pipe(
@@ -129,11 +131,41 @@ export class UserService {
     );
   }
 
-  toggleApprovementTask(task: UserOpdracht): Observable<User> {
+  deleteOpdracht(taskId: string): Observable<{}> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
+      })
+    };
+    return this.http.delete(
+      this.USER_URL + '/'
+      + localStorage.getItem('uid') + '/tasks/'
+      + taskId, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteReward(rewardId: string): Observable<{}> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken
+      })
+    };
+    return this.http.delete(
+      this.USER_URL + '/'
+      + this.uid + '/rewards/'
+      + rewardId, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  toggleApprovementTask(task: UserOpdracht): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken
       })
     };
 
@@ -149,7 +181,7 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': this.authToken
       })
     };
 

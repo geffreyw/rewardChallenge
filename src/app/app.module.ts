@@ -13,6 +13,8 @@ import {SharedModule} from './sharedModules/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
+import { UserOpdrachtListComponent } from './user-opdracht-list/user-opdracht-list.component';
+import { UserOpdrachtItemComponent } from './user/user-opdracht-item/user-opdracht-item.component';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,11 @@
+<div class="card shadow-sm my-1">
+  <div class="card-body">
+    <p><b class="text-primary">{{ opdracht.name }}</b></p>
+    <p>{{ opdracht.points }} <i class="fas fa-coins"></i></p>
+    <small class="text-muted">{{ opdracht?.meta?.date | date }}</small>
+    <button class="btn btn-link btn-del text-dark"
+            (click)="delete.emit()"
+            *ngIf="!opdracht.approved"><i class="fa fa-ban"></i>
+    </button>
+  </div>
+</div>
