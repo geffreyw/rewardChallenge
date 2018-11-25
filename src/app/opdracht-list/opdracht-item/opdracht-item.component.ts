@@ -59,13 +59,15 @@ export class OpdrachtItemComponent implements OnInit {
     this.clearEdit();
   }
 
-  async claimOpdracht() {
-    try {
-      const res = await this.opdrachtService.claimTask(this.item._id, this.userOpdracht).toPromise();
-      console.log(res);
-    } catch (err) {
-      console.log(err);
+  claimOpdracht(form) {
+    this.userOpdracht.meta.date = form.metaDate;
+    if (form.metaDescription) {
+      this.userOpdracht.meta.description = form.metaDescription;
     }
+    console.log(this.userOpdracht);
+    this.opdrachtService.claimTask(this.item._id, this.userOpdracht).subscribe( () => {
+      this.showClaim = false;
+    });
   }
 
 }

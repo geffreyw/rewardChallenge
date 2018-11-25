@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Reward} from '../../interfaces/reward';
 import {RewardService} from '../../services/reward.service';
+import {AuthService} from '../../services/auth.service';
+import {User} from '../../interfaces/user';
 
 
 @Component({
@@ -19,11 +21,33 @@ export class RewardItemComponent implements OnInit {
 
   showMore = false;
   editReward = false;
-  userPunten = 6;
+
+  user: User;
+  userPunten = 0;
 
   rewardEdit: Reward;
 
-  constructor(private rewardService: RewardService) { }
+  constructor(private rewardService: RewardService, private authService: AuthService) {
+    this.readUserdata();
+  }
+
+  readUserdata() {
+    this.authService.userData$.subscribe(user => {
+      if (user !== null) {
+        for (const task of user.tasks) {
+          if (task.approved) {
+            this.userPunten += task.points;
+          }
+        }
+        for (const reward of user.rewards) {
+          if (reward.approved || reward.pending) {
+            this.userPunten -= reward.points;
+          }
+        }
+        this.user = user;
+      }
+    });
+  }
 
   ngOnInit() {
     this.rewardEdit = Object.assign({}, this.item);

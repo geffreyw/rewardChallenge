@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import {SharedModule} from '../sharedModules/shared.module';
 import {FormsModule} from '@angular/forms';
-import {AproveRewardsComponent} from './aprove-rewards/aprove-rewards.component';
-import {AproveRewardItemComponent} from './aprove-rewards/aprove-reward-item/aprove-reward-item.component';
-import {AproveTasksComponent} from './aprove-oprdachten/aprove-tasks.component';
-import {AproveTaskItemComponent} from './aprove-oprdachten/task-item/aprove-task-item.component';
+import {ApproveRewardsComponent} from './approve-rewards/approve-rewards.component';
+import {ApproveRewardItemComponent} from './approve-rewards/approve-reward-item/approve-reward-item.component';
+import {ApproveTasksComponent} from './approve-oprdachten/approve-tasks.component';
+import {ApproveTaskItemComponent} from './approve-oprdachten/approve-task-item/approve-task-item.component';
 
 @NgModule({
   imports: [
@@ -14,6 +14,6 @@ import {AproveTaskItemComponent} from './aprove-oprdachten/task-item/aprove-task
     SharedModule,
     FormsModule
   ],
-  declarations: [AdminComponent, AproveRewardsComponent, AproveRewardItemComponent, AproveTasksComponent, AproveTaskItemComponent]
+  declarations: [AdminComponent, ApproveRewardsComponent, ApproveRewardItemComponent, ApproveTasksComponent, ApproveTaskItemComponent]
 })
 export class AdminModule { }

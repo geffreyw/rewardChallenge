@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="col-12 mt-2">
+    <div class="row">
+      <app-approve-reward-item
+        class="col-12 col-md-6"
+        *ngFor="let reward of userRewardsList"
+        [item]="reward"
+        (delete)="deleteOpdracht(reward)"
+        (approve)="approveOpdracht(reward)">
+      </app-approve-reward-item>
+    </div>
+  </div>
+</div>

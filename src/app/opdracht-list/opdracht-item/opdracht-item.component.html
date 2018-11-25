@@ -62,28 +62,40 @@
       <!-- CLAIM-->
 
 
-      <form #claimOpdrachtForm="ngForm" (submit)="claimOpdracht()" *ngIf="showClaim">
+      <form #claimOpdrachtForm="ngForm" *ngIf="showClaim">
         <div class="form-row">
           <div class="form-group col-12">
             <label for="metaDescription">Korte omschrijving:</label>
-            <input type="text" id="metaDescription" class="form-control"
-                   placeholder="Korte beschrijving"
-                   name="metaDescription"
-                   #metaDescription="ngModel"
-                   [(ngModel)]="userOpdracht.meta.description"/>
+            <textarea type="text" id="metaDescription" class="form-control"
+                      placeholder="Korte beschrijving"
+                      name="metaDescription"
+                      #metaDescription="ngModel"
+                      (ngModel)="metaDescription"></textarea>
           </div>
           <div class="form-group col-12">
             <label for="metaDate">Wanneer heb je deze taak afgerond?</label>
             <input type="date" id="metaDate" class="form-control"
+                   [class.is-valid]="metaDate.touched && metaDate.valid"
+                   [class.is-invalid]="metaDate.touched && metaDate.invalid"
                    required
                    name="metaDate"
                    #metaDate="ngModel"
-                   [(ngModel)]="userOpdracht.meta.date"/><!--todo validatie-->
+                   (ngModel)="metaDate"/>
+          </div>
+          <div *ngIf="metaDate.errors  && (metaDate.touched || metaDate.dirty)" class="text-danger">
+            <small *ngIf="metaDate.errors['required']">Geef een datum in!</small>
           </div>
         </div>
         <div class="form-row">
-          <div class="col-auto ">
-            <button type="submit" class="mx-auto btn btn-outline-secondary"><i class="fas fa-check-circle"></i> Claim
+          <div class="col-auto">
+            <button type="button" class="mx-auto btn btn-outline-secondary"
+                    (click)="claimOpdracht(claimOpdrachtForm.value)"
+                    [disabled]="!claimOpdrachtForm.valid"><i class="fas fa-check-circle"></i> Claim
+            </button>
+          </div>
+          <div class="col-auto">
+            <button type="button" class="btn btn-outline-dark"
+                    (click)="showClaim=false"><i class="fas fa-ban"></i> Annuleer
             </button>
           </div>
         </div>

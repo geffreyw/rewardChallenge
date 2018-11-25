@@ -37,6 +37,11 @@ export class UserService {
               totPoints += task.points;
             }
           }
+          for (const reward of user.rewards) {
+            if (reward.approved || reward.pending ) {
+              totPoints -= reward.points;
+            }
+          }
           user.points = totPoints;
         }
         return users;
@@ -58,6 +63,11 @@ export class UserService {
         for (const task of user.tasks) {
           if (task.approved) {
             totPoints += task.points;
+          }
+        }
+        for (const reward of user.rewards) {
+          if (reward.approved || reward.pending ) {
+            totPoints -= reward.points;
           }
         }
         user.points = totPoints;
@@ -131,22 +141,7 @@ export class UserService {
     );
   }
 
-  deleteOpdracht(taskId: string): Observable<{}> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
-      })
-    };
-    return this.http.delete(
-      this.USER_URL + '/'
-      + localStorage.getItem('uid') + '/tasks/'
-      + taskId, httpOptions).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  deleteReward(rewardId: string): Observable<{}> {
+  deleteOpdracht(task: UserOpdracht, uid: string): Observable<{}> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -155,13 +150,28 @@ export class UserService {
     };
     return this.http.delete(
       this.USER_URL + '/'
-      + this.uid + '/rewards/'
-      + rewardId, httpOptions).pipe(
+      + uid + '/tasks/'
+      + task._id, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
-  toggleApprovementTask(task: UserOpdracht): Observable<User> {
+  deleteReward(reward: UserReward, uid: string): Observable<{}> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.authToken
+      })
+    };
+    return this.http.delete(
+      this.USER_URL + '/'
+      + uid + '/rewards/'
+      + reward._id, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  approveOpdracht(task: UserOpdracht): Observable<User> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -170,14 +180,14 @@ export class UserService {
     };
 
     const body = {
-      approved: !task.approved
+      approved: true
     };
 
     return this.http.put<User>(`${this.API_URL}/users/${task.user.id}/tasks/${task._id}/status`, body, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  toggleApprovementReward(reward: UserReward): Observable<User> {
+  approveReward(reward: UserReward): Observable<User> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -186,7 +196,7 @@ export class UserService {
     };
 
     const body = {
-      approved: !reward.approved
+      approved: true
     };
 
     return this.http.put<User>(`${this.API_URL}/users/${reward.user.id}/rewards/${reward._id}/status`, body, httpOptions)

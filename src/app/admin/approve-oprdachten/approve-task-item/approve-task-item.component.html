@@ -1,0 +1,42 @@
+<div class="card my-2 shadow">
+  <div class="card-body">
+    <div class="card-text">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-9 col-lg-9">
+          <p class="text-primary"><b>{{item.name}}</b></p>
+        </div>
+
+        <p class="col-12">Van: {{item.user.email}}</p>
+        <div *ngIf="item.meta" class="col-12 col-md-12">
+
+          <div *ngIf="item.meta.description">
+            <p class=" text-primary">Description</p>
+            <p>{{item.meta.description}}</p>
+          </div>
+          <div *ngIf="!item.meta.description">
+            <p class=" text-primary">Description</p>
+            <p>Geen descriptie meegegeven...</p>
+          </div>
+          <small class="text-muted">
+            {{item.meta?.date | date}}
+          </small>
+        </div>
+        <div class="col-12 mt-2">
+          <div class="row">
+            <div class="col-auto">
+              <button class="btn btn-outline-secondary" (click)="approve.emit()">
+                Goedkeuren
+              </button>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-outline-dark" (click)="delete.emit()">
+                Afkeuren
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

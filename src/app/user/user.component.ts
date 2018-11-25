@@ -23,10 +23,11 @@ export class UserComponent implements OnInit {
   pendingRewards: UserReward[] = [];
 
   constructor(private authService: AuthService, private userService: UserService) {
-    this.readUserdata();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.readUserdata();
+  }
 
   readUserdata() {
     this.authService.userData$.subscribe(user => {
@@ -50,14 +51,14 @@ export class UserComponent implements OnInit {
     });
   }
 
-  deleteOpdracht(taskId) {
-    this.pendingTasks = this.pendingTasks.filter(t => t._id !== taskId);
-    this.userService.deleteOpdracht(taskId).subscribe();
+  deleteOpdracht(task) {
+    this.pendingTasks = this.pendingTasks.filter(t => t !== task);
+    this.userService.deleteOpdracht(task, this.user._id).subscribe();
   }
 
-  deleteReward(rewardId) {
-    this.pendingRewards = this.pendingRewards.filter(r => r._id !== rewardId);
-    this.userService.deleteReward(rewardId).subscribe();
+  deleteReward(reward) {
+    this.pendingRewards = this.pendingRewards.filter(r => r !== reward);
+    this.userService.deleteReward(reward, this.user._id).subscribe();
   }
 
 }
