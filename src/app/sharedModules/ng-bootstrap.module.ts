@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   NgbAlertModule,
-  NgbCollapseModule, NgbDropdownModule
+  NgbCollapseModule, NgbDatepickerModule, NgbDropdownModule
 } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -15,7 +15,7 @@ import {
   exports: [
     NgbAlertModule,
     NgbCollapseModule,
-    NgbDropdownModule
+    NgbDropdownModule,
   ],
   declarations: []
 })

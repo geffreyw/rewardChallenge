@@ -14,31 +14,33 @@ export class OpdrachtItemComponent implements OnInit {
   @Input() item: Opdracht;
   @Input() index: number;
   @Input() aanpasbaar = false;
-  @Input() userOpdracht: UserOpdracht;
 
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter();
 
   showMore = false;
   editOpdracht = false;
+  showClaim = false;
 
   opdrachtEdit: Opdracht;
+  userOpdracht: UserOpdracht;
+
   constructor(public opdrachtService: OpdrachtService) {  }
 
   ngOnInit() {
     this.opdrachtEdit = Object.assign({}, this.item);
     this.userOpdracht = new UserOpdracht;
-    for(let key in this.item){
-      if(!key.match('^_')) {
+    for (const key in this.item) {
+      if (!key.match('^_')) {
         this.userOpdracht[key] = this.item[key];
       }
     }
 
     this.userOpdracht.meta = {
       description: null,
-      date: null
-    }
-    
+      date: new Date()
+    };
+
   }
 
   deleteOpdracht() {
@@ -58,11 +60,11 @@ export class OpdrachtItemComponent implements OnInit {
   }
 
   async claimOpdracht() {
-    try{
-      let res = await this.opdrachtService.claimTask(this.item._id, this.userOpdracht).toPromise();
-      console.log(res)
-    }catch(err){
-      console.log(err)
+    try {
+      const res = await this.opdrachtService.claimTask(this.item._id, this.userOpdracht).toPromise();
+      console.log(res);
+    } catch (err) {
+      console.log(err);
     }
   }
 
