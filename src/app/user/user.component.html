@@ -26,6 +26,12 @@
   </div>
 </div>
 
+<div class="container" *ngIf="user">
+  <div class="col-12" *ngIf="user.tasks.length <= 0">
+    <p>U heeft nog opdrachten vervuld.</p>
+  </div>
+</div>
+
 <div class="container">
   <div class="col-12">
     <pre>{{ user | json }}</pre>

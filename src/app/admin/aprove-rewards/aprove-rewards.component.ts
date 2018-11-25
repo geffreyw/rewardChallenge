@@ -3,7 +3,7 @@ import { UserReward } from '../../interfaces/userReward';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-rewards',
+  selector: 'app-aprove-rewards',
   templateUrl: './aprove-rewards.component.html',
   styleUrls: ['./aprove-rewards.component.scss']
 })
