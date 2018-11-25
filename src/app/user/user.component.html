@@ -1,4 +1,4 @@
-<div class="bg-gradient-blue" id="header" style="min-height: 150px">
+<div class="bg-gradient-blue" id="header" style="min-height: 150px" *ngIf="user">
   <div class="container px-3 pt-2">
     <div class="row">
       <div class="col-12 col-sm-6">
@@ -26,9 +26,15 @@
   </div>
 </div>
 
-<!--<app-opdracht-list [editable]="true"></app-opdracht-list>-->
 <div class="container">
+  <div class="col-12">
+    <pre>{{ user | json }}</pre>
+  </div>
+</div>
+
+<!--<app-opdracht-list [editable]="true"></app-opdracht-list>-->
+<!--<div class="container">
   <app-opdracht-list [elementClass]="'col-12 col-md-6 col-lg-4'" [limit]="2"></app-opdracht-list>
   <hr>
   <app-reward-list [elementClass]="'col-12 col-md-6 col-lg-4'" [limit]="4"></app-reward-list>
-</div>
+</div>-->

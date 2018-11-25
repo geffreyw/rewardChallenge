@@ -14,7 +14,7 @@ export class UserService {
 
   readonly USER_URL = 'https://hidden-citadel-73667.herokuapp.com/users';
   readonly API_URL = 'https://hidden-citadel-73667.herokuapp.com';
-  
+
   authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjgwOTE1ZTNmMGJiMDAxNjkzNzAzZSIsImVtYWlsIjoiZ2VmZnJleXcyQGhvdG1haWwuY29tIiwicm9sZSI6ImFkbWluIiwidGFza3MiOltdLCJyZXdhcmRzIjpbXX0sImlhdCI6MTU0Mjk4MjIwNywiZXhwIjoxNTQzMDY4NjA3fQ.70ZXPfc7omcEYmx0qF2FJQSQPAd1eWzFXDz2jxzwbvU';
 
   constructor(private http: HttpClient) {
@@ -135,14 +135,14 @@ export class UserService {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       })
-    }
-  
-    let body = {
-      approved: !task.approved
-    }
+    };
 
-    return this.http.put<User>(`${this.API_URL}/users/${task.user.id}/tasks/${task._id}/status`,body,httpOptions)
-      .pipe(catchError(this.handleError))
+    const body = {
+      approved: !task.approved
+    };
+
+    return this.http.put<User>(`${this.API_URL}/users/${task.user.id}/tasks/${task._id}/status`, body, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   toggleApprovementReward(reward: UserReward): Observable<User> {
@@ -151,14 +151,14 @@ export class UserService {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('token')
       })
-    }
-  
-    let body = {
-      approved: !reward.approved
-    }
+    };
 
-    return this.http.put<User>(`${this.API_URL}/users/${reward.user.id}/rewards/${reward._id}/status`,body,httpOptions)
-      .pipe(catchError(this.handleError))
+    const body = {
+      approved: !reward.approved
+    };
+
+    return this.http.put<User>(`${this.API_URL}/users/${reward.user.id}/rewards/${reward._id}/status`, body, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -172,7 +172,7 @@ export class UserService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    console.log(error)
+    console.log(error);
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');

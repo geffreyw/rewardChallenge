@@ -1,27 +1,37 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm sticky-top">
-  <a class="navbar-brand" routerLink="/"><img src="../../assets/logo-stack.png" class="" height="35"/></a>
+  <a class="navbar-brand" routerLink="/user"><img src="../../assets/logo-stack.png" class="" height="35"/></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-          (click)="isCollapsed = !isCollapsed">
+          (click)="isCollapsed = !isCollapsed"
+          *ngIf="user">
     <span class="navbar-toggler-icon"></span>
 
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed">
+  <div class="collapse navbar-collapse" id="navbarContent" *ngIf="user" [ngbCollapse]="isCollapsed">
     <ul class="navbar-nav mr-auto" (click)="isCollapsed = !isCollapsed">
       <li class="nav-item">
         <a class="nav-link" routerLink="/user" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/opdrachten" routerLinkActive="active">Opdrachten</a>
+        <a class="nav-link" routerLink="/allOpdrachten" routerLinkActive="active">Opdrachten</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/rewards" routerLinkActive="active">Rewards</a>
+        <a class="nav-link" routerLink="/allRewards" routerLinkActive="active">Rewards</a>
       </li>
     </ul>
-    <ul class="navbar-nav" *ngIf="user?.role=='admin'">
+    <ul class="navbar-nav" *ngIf="user.role=='admin'">
+      <li class="dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="aprove" ngbDropdownToggle>Goedkeuren</a>
+        <div class="dropdown-menu dropdown" aria-labelledby="aprove"
+             ngbDropdownMenu
+             (click)="isCollapsed = !isCollapsed">
+          <a class="dropdown-item" routerLink="/admin/aproveOpdrachten">Opdrachten</a>
+          <a class="dropdown-item" routerLink="/admin/aproveRewards">Rewards</a>
+        </div>
+      </li>
       <li class="dropdown" ngbDropdown>
         <a class="nav-link dropdown-toggle" id="beheren" ngbDropdownToggle>Beheren</a>
-        <div class="dropdown-menu dropdown" aria-labelledby="id01"
+        <div class="dropdown-menu dropdown" aria-labelledby="beheren"
              ngbDropdownMenu
              (click)="isCollapsed = !isCollapsed">
           <a class="dropdown-item" routerLink="/admin/opdrachten">Opdrachten</a>
@@ -30,7 +40,7 @@
         </div>
       </li>
     </ul>
-    <ul class="navbar-nav" *ngIf="user">
+    <ul class="navbar-nav">
       <!--<span class="navbar-text d-md-block d-sm-none">
             {{ user.email }}
       </span>
@@ -39,7 +49,7 @@
       </li>-->
       <li class="dropdown" ngbDropdown>
         <a class="nav-link dropdown-toggle" id="userinfo" ngbDropdownToggle>{{ user.email }} <i class="fas fa-coins"></i> {{ user.points }}</a>
-        <div class="dropdown-menu dropdown" aria-labelledby="id01"
+        <div class="dropdown-menu dropdown" aria-labelledby="userinfo"
              ngbDropdownMenu
              (click)="isCollapsed = !isCollapsed">
           <a class="dropdown-item" (click)="logout()">Logout</a>

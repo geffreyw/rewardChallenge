@@ -4,34 +4,34 @@ import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-rewards',
-  templateUrl: './rewards.component.html',
-  styleUrls: ['./rewards.component.scss']
+  templateUrl: './aprove-rewards.component.html',
+  styleUrls: ['./aprove-rewards.component.scss']
 })
-export class RewardsComponent implements OnInit {
+export class AproveRewardsComponent implements OnInit {
 
   userRewardsList: UserReward[];
 
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService) {
     this.userRewardsList = new Array<UserReward>();
 
   }
 
   async getAllUserRewards() {
-    try{
+    try {
       const users = await this.userService.getUsers().toPromise();
-      for (let user of users){
-        for (let reward of user.rewards){
-          let userReward = new UserReward
+      for (const user of users) {
+        for (const reward of user.rewards) {
+          let userReward = new UserReward;
           userReward = reward;
           userReward.user = {
             id: user._id,
             email: user.email
-          }
-          this.userRewardsList.push(userReward)
+          };
+          this.userRewardsList.push(userReward);
         }
       }
-    }catch(err){}
+    } catch (err) {}
   }
 
   ngOnInit() {

@@ -72,6 +72,7 @@ export class AuthService {
   }
 
   logout() {
+    // console.warn('logedout');
     localStorage.clear();
     this.setUserData(null);
   }
@@ -87,7 +88,7 @@ export class AuthService {
   }
 
   private setUserData(user: User) {
-    console.log(user);
+    // console.warn('user data set', user);
     if (user !== null) {
       this.userData$.next(user);
       this.router.navigate(['/user']);

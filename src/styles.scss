@@ -4,12 +4,12 @@
 
  */
 
-$orange : #f49900;
-$green : #71b643;
-$blue : #08ace1;
-$dark : #333e47;
-$light : #f4f4f4;
-$grey : #464a4c;
+$orange: #f49900;
+$green: #71b643;
+$blue: #08ace1;
+$dark: #333e47;
+$light: #f4f4f4;
+$grey: #464a4c;
 
 $theme-colors: (
   'primary' : $orange,
@@ -22,35 +22,36 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-
 /* Belangrijkste code */
-body{
+body {
   background-color: $light;
   color: $dark;
   min-height: 100vh;
 }
 
-#mainContent{
+#mainContent {
 
 }
+
 /*  header */
-.bg-gradient-blue{
-  background: linear-gradient(to bottom,#0078d7 0%,$blue);
-  box-shadow: 0 12px 45px -8px rgba(0,120,215,.35);
+.bg-gradient-blue {
+  background: linear-gradient(to bottom, #0078d7 0%, $blue);
+  box-shadow: 0 12px 45px -8px rgba(0, 120, 215, .35);
 }
-#header{
+
+#header {
   color: white;
 
-  h2{
+  h2 {
     font-size: 28px;
     line-height: 36px;
     font-weight: bold;
   }
-  p, span{
+  p, span {
     padding: 3px 0 1px;
   }
-  .text-muted{
-    color: rgba(255,255,255,0.6) !important;
+  .text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
   }
 
 }
@@ -60,40 +61,45 @@ body{
   cursor: pointer;
 }
 
-a:hover, a:focus{
+a:hover, a:focus {
   text-decoration: none;
 }
 
 /*  cards */
 
-
 /*  nav-tabs   */
-.navbar-nav{
+.navbar-nav {
   border-bottom: none;
 }
-.navbar-nav .nav-link.active{
+
+.navbar-nav .nav-link.active {
   color: #495057;
   border: none;
   border-bottom: 2px solid $blue;
   background-color: inherit;
-  transition: all}
-.navbar-nav .nav-link{
+  transition: all
+}
+
+.navbar-nav .nav-link {
   color: #495057;
   background-color: inherit;
   padding: 0px;
   margin: 0.5rem 1rem;
   border: none;
 }
-.nav-link:hover{
-  cursor: pointer;
+
+.nav-link, .dropdown, .dropdown-item {
+  :hover {
+    cursor: pointer;
+  }
 }
 
-.progress-bar{
+.progress-bar {
   width: 0;
   transition: width 2s;
 }
 
-.fa-coins{
+.fa-coins {
   color: gold;
 }
 

@@ -4,10 +4,10 @@ import { UserOpdracht } from '../../../interfaces/userOpdracht';
 
 @Component({
   selector: 'app-task-item',
-  templateUrl: './task-item.component.html',
-  styleUrls: ['./task-item.component.scss']
+  templateUrl: './aprove-task-item.component.html',
+  styleUrls: ['./aprove-task-item.component.scss']
 })
-export class TaskItemComponent implements OnInit {
+export class AproveTaskItemComponent implements OnInit {
 
   @Input() item: UserOpdracht;
 
@@ -16,13 +16,13 @@ export class TaskItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  async toggleApprovementTask(){
-    try{
-      let res = await this.userService.toggleApprovementTask(this.item).toPromise();
+  async toggleApprovementTask() {
+    try {
+      const res = await this.userService.toggleApprovementTask(this.item).toPromise();
       this.item.approved = !this.item.approved;
-      console.log(res)
+      console.log(res);
 
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   }

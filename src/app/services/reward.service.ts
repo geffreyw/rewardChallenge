@@ -3,7 +3,6 @@ import {Reward} from '../interfaces/reward';
 import {User} from '../interfaces/user';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Opdracht} from '../interfaces/opdracht';
 import {catchError, map, share} from 'rxjs/operators';
 
 @Injectable({

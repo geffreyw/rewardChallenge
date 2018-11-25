@@ -20,13 +20,15 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.authService.userData$.subscribe(user => {
-      for (const task of user.tasks) {
-        if (task.approved) {
-          this.week.points += task.points;
-          this.week.tasks.push(task);
+      if (user !== null) {
+        for (const task of user.tasks) {
+          if (task.approved) {
+            this.week.points += task.points;
+            this.week.tasks.push(task);
+          }
         }
+        this.user = user;
       }
-      this.user = user;
     });
   }
 
