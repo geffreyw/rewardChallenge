@@ -3,6 +3,8 @@ import {Reward} from '../../interfaces/reward';
 import {RewardService} from '../../services/reward.service';
 import {AuthService} from '../../services/auth.service';
 import {User} from '../../interfaces/user';
+import {UserService} from '../../services/user.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class RewardItemComponent implements OnInit {
 
   rewardEdit: Reward;
 
-  constructor(private rewardService: RewardService, private authService: AuthService) {
+  constructor(private rewardService: RewardService, private authService: AuthService, private router: Router) {
     this.readUserdata();
   }
 
@@ -71,14 +73,13 @@ export class RewardItemComponent implements OnInit {
 
   async claimReward() {
     // console.log("merci");
-    try{
-      let res = await this.rewardService.claimReward(this.item).toPromise()
+    try {
+      const res = await this.rewardService.claimReward(this.item).toPromise();
       console.log(res);
-    }catch(err){
-      console.log(err)
-
+      this.router.navigate(['/user']);
+    } catch (err) {
+      console.log(err);
     }
-    
   }
 
 }
