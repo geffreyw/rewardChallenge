@@ -1,5 +1,39 @@
-<div>
-  <p>{{item.name}}</p>
-  <p></p>
-  <button (click)="toggleApprovementTask()">Verander status</button>
+<div class="card my-2 shadow">
+  <div class="card-body">
+    <div class="card-text">
+
+      <div class="row">
+        <div class="col-sm-12 col-md-9 col-lg-9">
+          <p class="text-primary"><b>{{item.name}}</b></p>
+        </div>
+        <div class="col-sm-12 col-md-3 col-lg-3">
+          <p [ngStyle]="pendingStyle" *ngIf="item.pending" id="pendingStyleSmall">
+            <i class="far fa-clock"></i> Pending...
+          </p>
+        </div>
+
+        <p class="col-12 col-md-12">Van: {{item.user.email}}</p>
+        <div *ngIf="item.meta" class="col-12 col-md-12">
+
+          <div *ngIf="item.meta.description">
+            <p class=" text-primary">Description</p>
+            <p>{{item.meta.description}}</p>
+          </div>
+          <div *ngIf="!item.meta.description">
+            <p class=" text-primary">Description</p>
+            <p [ngStyle]="{'color': 'red'}">Geen descriptie meegegeven...</p>
+          </div>
+          <p *ngIf="item.meta.date" [ngStyle]="{'color': 'grey', 'text-align': 'right'}">{{item.meta.date
+            | date}}</p>
+        </div>
+        <div class="col-12 col-md-12">
+          <button (click)="toggleApprovementTask()" [ngClass]="status()" [ngStyle]="{'float': 'right'}">
+            Verander status
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
