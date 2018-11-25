@@ -1,5 +1,20 @@
-<app-aprove-reward-item
-  *ngFor="let reward of userRewardsList; let i = index"
-  [item]="reward">
+<div class="container">
+  <div class="col-12 mt-2">
+    <div class="row">
+      <div class="col-12">
+        <div class="progress mb-3" *ngIf="preloader">
+          <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated" style="width:100%"></div>
+        </div>
+      </div>
+      <app-aprove-reward-item
+        class="col-12"
+        *ngFor="let reward of userRewardsList | slice:0:limit; let i = index"
+        [item]="reward"
+      >
+      </app-aprove-reward-item>
+    </div>
+  </div>
+</div>
 
-</app-aprove-reward-item>
+
+>>>>>>> 7eb247a302a17182c424f122e90b2c3b29743cf4
