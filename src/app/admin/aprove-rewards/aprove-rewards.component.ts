@@ -14,6 +14,7 @@ export class AproveRewardsComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.userRewardsList = new Array<UserReward>();
+    this.getAllUserRewards();
 
   }
 
@@ -31,6 +32,8 @@ export class AproveRewardsComponent implements OnInit {
           this.userRewardsList.push(userReward);
         }
       }
+
+      console.log(this.userRewardsList)
     } catch (err) {}
   }
 
