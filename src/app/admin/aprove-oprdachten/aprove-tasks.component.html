@@ -6,14 +6,10 @@
           <div class="progress-bar progress-bar-striped bg-secondary progress-bar-animated" style="width:100%"></div>
         </div>
       </div>
-      <app-task-item
-        class="col-12"
-        *ngFor="let opdracht of userOprdrachtenList | slice:0:limit; let i = index"
-        [item]="opdracht"
-      >
+
+
+      <app-task-item class="col-12" *ngFor="let opdracht of userOprdrachtenList | slice:0:limit; let i = index" [item]="opdracht">
       </app-task-item>
     </div>
   </div>
 </div>
-
-

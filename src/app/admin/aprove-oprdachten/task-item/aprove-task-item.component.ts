@@ -11,6 +11,12 @@ export class AproveTaskItemComponent implements OnInit {
 
   @Input() item: UserOpdracht;
 
+  pendingStyle = {
+    'color': 'grey', 
+    'font-size': '0.8rem', 
+    'text-align': 'right'
+  }
+
   constructor(public userService: UserService) { }
 
   ngOnInit() {
@@ -25,6 +31,10 @@ export class AproveTaskItemComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  status() {
+    return (!this.item.pending) ? ((this.item.approved) ? 'btn btn-success' : 'btn btn-danger') : 'btn btn-warning';
   }
 
 }
